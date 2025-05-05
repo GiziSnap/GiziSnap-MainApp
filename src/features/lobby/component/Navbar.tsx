@@ -1,41 +1,11 @@
-import React, { useState } from 'react';
-import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-} from '@/components/ui/sheet';
 import Icon from '../../../../public/icon.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Separator } from '@/components/ui/separator';
 import { Navbar as DesktopNavbar } from '../component/navlink/desktop/Navbar';
 import { Navbar as NavbarMobile } from '../component/navlink/mobile/Navbar';
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const scrollToSection = (sectionId: string) => {
-    setIsMenuOpen(false);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const navbar = document.querySelector('nav');
-      const navbarHeight = navbar ? navbar.offsetHeight : 0;
-
-      const elementPosition =
-        element.getBoundingClientRect().top + window.scrollY;
-
-      window.scrollTo({
-        top: elementPosition - navbarHeight,
-        behavior: 'smooth',
-      });
-    }
-  };
-
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 bg-white shadow-md dark:bg-black">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

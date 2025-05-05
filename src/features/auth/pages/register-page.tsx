@@ -1,126 +1,67 @@
 'use client';
 
-import { PageContainer, SectionContainer } from '@/components/layouts';
-import { Button } from '@/components/ui/button';
+import { PageContainer } from '@/components/layouts';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import React, { useState } from 'react';
-import Link from 'next/link'; // Gunakan Link dari Next.js
-import { Eye, EyeOff } from 'lucide-react';
+import Link from 'next/link';
+import { RegisterUserForm } from '../component/form/RegisterUserForm';
+import Medical_Illustration from '@/../public/Ilustration1.png';
+import Image from 'next/image';
 
 export const RegisterPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Logic for handling registration
-    console.log('Registering:', formData);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
-    <PageContainer title="Register" isDashboard={false} withHeader withFooter>
-      <SectionContainer
-        container
-        className="flex min-h-screen items-center justify-center"
-      >
-        <Card className="w-full max-w-xl p-6">
-          <CardHeader>
-            <h2 className="text-center text-xl font-semibold">Register</h2>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="username" className="mb-2 block">
-                  Username
-                </label>
-                <Input
-                  id="username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  placeholder="Enter your username"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-2 block">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="mb-2 block">
-                  Password
-                </label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? 'text' : 'password'}
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="Enter your password"
-                    required
-                    className="pr-10"
-                  />
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
-                    aria-label={
-                      showPassword ? 'Hide password' : 'Show password'
-                    }
-                  >
-                    {showPassword ? (
-                      <EyeOff className="h-5 w-5" />
-                    ) : (
-                      <Eye className="h-5 w-5" />
-                    )}
-                  </button>
-                </div>
-              </div>
-              <Button className="w-full" type="submit">
-                Register
-              </Button>
-            </form>
-            <p className="mt-4 text-center text-sm">
-              Already have an account?{' '}
-              <Link
-                href="/auth/login"
-                className="text-blue-500 hover:underline"
-              >
-                Login here
-              </Link>
+    <PageContainer title="Daftar - GiziSnap">
+      <div className="flex min-h-screen">
+        <div className="relative flex w-1/2 items-center justify-center bg-green-50 p-12">
+          <div className="absolute top-12 z-10 text-center">
+            <h1 className="mb-4 text-3xl font-bold text-green-900">
+              Pantau Gizi Anda dengan Mudah
+            </h1>
+            <p className="mx-auto max-w-md text-lg text-green-700">
+              GiziSnap membantu Anda memahami dan mengelola asupan nutrisi
+              secara akurat dan sederhana
             </p>
-          </CardContent>
-        </Card>
-      </SectionContainer>
+          </div>
+          <Image
+            src={Medical_Illustration}
+            width={500}
+            height={500}
+            alt="GiziSnap Ilustrasi"
+            className="relative z-0 max-h-[600px] max-w-full rotate-y-180 object-contain"
+          />
+        </div>
+
+        {/* Sisi Kanan - Form Registrasi */}
+        <div className="flex w-1/2 items-center justify-center p-12">
+          <Card className="w-full max-w-md shadow-lg">
+            <CardHeader className="pb-4 text-center">
+              <h2 className="text-2xl font-bold text-green-800">
+                Daftar di GiziSnap
+              </h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Mulai Perjalanan Gizi Anda
+              </p>
+            </CardHeader>
+            <CardContent>
+              {/* Form Registrasi */}
+              <RegisterUserForm />
+
+              <div className="mt-4 text-center">
+                <p className="text-sm text-gray-700">
+                  Sudah punya akun?{' '}
+                  <Link
+                    href="/auth/login"
+                    className="font-semibold text-green-600 hover:underline"
+                  >
+                    Masuk di sini
+                  </Link>
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </PageContainer>
   );
 };
+
+export default RegisterPage;

@@ -12,7 +12,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-// Tambahkan type untuk props
 type HeaderDashboardProps = {
   brandName?: string;
   userName?: string;
@@ -90,7 +89,6 @@ export const HeaderDashboard = ({
             <DropdownMenuItem>
               <button
                 className="text-destructive w-full text-left"
-                // Tambahkan fungsi logout
                 // onClick={handleLogout}
               >
                 Logout
