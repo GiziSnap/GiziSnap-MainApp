@@ -1,56 +1,52 @@
 'use client';
 
 import { PageContainer } from '@/components/layouts';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import Link from 'next/link';
-import { RegisterUserForm } from '../component/form/RegisterUserForm';
-import Medical_Illustration from '@/../public/Ilustration1.png';
 import Image from 'next/image';
+import Link from 'next/link';
+import bg_img from '@/../public/bg-img1.jpg';
+import { RegisterUserForm } from '../component/form/RegisterUserForm';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 export const RegisterPage = () => {
+  const router = useRouter();
   return (
     <PageContainer title="Daftar - GiziSnap">
-      <div className="flex min-h-screen">
-        <div className="relative flex w-1/2 items-center justify-center bg-green-50 p-12">
-          <div className="absolute top-12 z-10 text-center">
-            <h1 className="mb-4 text-3xl font-bold text-green-900">
-              Pantau Gizi Anda dengan Mudah
-            </h1>
-            <p className="mx-auto max-w-md text-lg text-green-700">
-              GiziSnap membantu Anda memahami dan mengelola asupan nutrisi
-              secara akurat dan sederhana
-            </p>
-          </div>
+      <div className="relative flex min-h-screen w-full">
+        <div className="absolute top-4 left-4 z-50 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/80">
+          <Button variant={'ghost'} onClick={() => router.push('/')}>
+            <ArrowLeft size={24} />
+          </Button>
+        </div>
+        <div className="absolute inset-0 z-0">
           <Image
-            src={Medical_Illustration}
-            width={500}
-            height={500}
-            alt="GiziSnap Ilustrasi"
-            className="relative z-0 max-h-[600px] max-w-full rotate-y-180 object-contain"
+            src={bg_img}
+            alt="GiziSnap Background"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
           />
         </div>
-
-        {/* Sisi Kanan - Form Registrasi */}
-        <div className="flex w-1/2 items-center justify-center p-12">
-          <Card className="w-full max-w-md shadow-lg">
+        <div className="relative z-10 flex w-full items-center justify-center px-4">
+          <Card className="w-full max-w-md border-0 bg-white/80 shadow-2xl backdrop-blur-sm">
             <CardHeader className="pb-4 text-center">
               <h2 className="text-2xl font-bold text-green-800">
                 Daftar di GiziSnap
               </h2>
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="mt-2 text-sm text-gray-700">
                 Mulai Perjalanan Gizi Anda
               </p>
             </CardHeader>
             <CardContent>
-              {/* Form Registrasi */}
               <RegisterUserForm />
-
               <div className="mt-4 text-center">
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-gray-800">
                   Sudah punya akun?{' '}
                   <Link
                     href="/auth/login"
-                    className="font-semibold text-green-600 hover:underline"
+                    className="font-semibold text-green-700 hover:underline"
                   >
                     Masuk di sini
                   </Link>
@@ -63,5 +59,3 @@ export const RegisterPage = () => {
     </PageContainer>
   );
 };
-
-export default RegisterPage;
