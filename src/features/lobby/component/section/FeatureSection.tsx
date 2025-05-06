@@ -1,6 +1,7 @@
 import React from 'react';
 import { Camera, BarChart2, Star } from 'lucide-react';
-import FeatureCard from './card/FeatureCard';
+import FeatureCard from '../card/FeatureCard';
+import { SectionContainer } from '@/components/layouts';
 
 export const FeaturesSection = () => {
   const features = [
@@ -25,7 +26,7 @@ export const FeaturesSection = () => {
   ];
 
   return (
-    <section id="features" className="bg-gray-50 py-16 dark:bg-black">
+    <SectionContainer id="features" className="bg-gray-50 py-16 dark:bg-black">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold">Fitur Unggulan GiziSnap</h2>
@@ -46,6 +47,6 @@ export const FeaturesSection = () => {
           ))}
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 };

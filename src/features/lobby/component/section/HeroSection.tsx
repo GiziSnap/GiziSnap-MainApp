@@ -4,11 +4,12 @@ import { Button } from '@/components/ui/button';
 import Ilustration from '@/../public/Ilustration.png';
 import Image from 'next/image';
 import { Heading } from '@/components/ui/heading';
+import { SectionContainer } from '@/components/layouts';
 
 export const HeroSection = () => {
   return (
     <div id="hero" className="mt-12 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+      <SectionContainer className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           <div>
             <Heading
@@ -73,7 +74,7 @@ export const HeroSection = () => {
             />
           </div>
         </div>
-      </div>
+      </SectionContainer>
     </div>
   );
 };

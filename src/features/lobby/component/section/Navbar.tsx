@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
-import Icon from '../../../../public/icon.png';
+import Icon from '@../../public/icon.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Navbar as DesktopNavbar } from '../component/navlink/desktop/Navbar';
-import { Navbar as NavbarMobile } from '../component/navlink/mobile/Navbar';
+import { Navbar as DesktopNavbar } from '../navlink/desktop/Navbar';
+import { Navbar as NavbarMobile } from '../navlink/mobile/Navbar';
 
 export const Navbar = () => {
   return (

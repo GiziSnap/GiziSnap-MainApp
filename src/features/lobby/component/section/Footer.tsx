@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { Footer as FooterElement } from '@/components/elements/Footer';
-import Icon from '../../../../public/icon.png';
+import Icon from '@../../public/icon.png';
 
 export const Footer = () => {
   return (

@@ -15,8 +15,12 @@ export const LoginPage = () => {
   return (
     <PageContainer title="Login - GiziSnap">
       <div className="relative flex min-h-screen w-full">
-        <div className="absolute top-4 left-4 z-50 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-white/80">
-          <Button variant={'ghost'} onClick={() => router.push('/')}>
+        <div className="absolute top-4 left-4 z-50 flex items-center justify-center rounded-full bg-white/80 ">
+          <Button
+            variant={'outline'}
+            onClick={() => router.push('/')}
+            className="flex h-12 w-12 items-center justify-center rounded-full"
+          >
             <ArrowLeft size={24} />
           </Button>
         </div>
