@@ -44,6 +44,7 @@ export const LoginPage = () => {
               </p>
             </CardHeader>
             <CardContent>
+              {/* User Login Form */}
               <LoginUserForm />
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-700">

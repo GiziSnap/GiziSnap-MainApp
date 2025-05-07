@@ -30,7 +30,10 @@ export const registerUserFormSchema = z
   });
 
 export const loginUserFormSchema = z.object({
-  email: z.string().email({ message: 'Email tidak valid' }),
+  username: z.string({
+    required_error: 'Email atau username diperlukan',
+    invalid_type_error: 'Email atau username diperlukan',
+  }),
   password: z
     .string()
     .min(8, { message: 'Kata sandi minimal 8 karakter' })
