@@ -28,9 +28,9 @@ export default function RootLayout({
       className={`${geist.variable}`}
     >
       <body>
-        <Providers>
+        <AppProvider>
           {children}
-        </Providers>
+        </AppProvider>
       </body>
     </html>
   );

@@ -42,11 +42,11 @@ export const LoginUserFormInner = ({
         name="username"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>username</FormLabel>
+            <FormLabel>Username</FormLabel>
             <FormControl>
               <Input
-                type="email"
-                placeholder="Masukkan email Anda"
+                type="text"
+                placeholder="Masukkan Username Anda"
                 {...field}
                 className="border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
               />

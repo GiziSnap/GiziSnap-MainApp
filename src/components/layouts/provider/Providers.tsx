@@ -1,8 +1,7 @@
-'use client';
-
 import { Toaster } from 'sonner';
 import { ThemeProvider } from './ThemeProvider';
 import { SessionProvider } from 'next-auth/react';
+import { TanstackProvider } from './TanStackProvider';
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -11,15 +10,10 @@ type ProvidersProps = {
 export const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
     <SessionProvider>
+      <TanstackProvider>
         {children}
-        <Toaster position='top-center'/>
-      {/* <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-      </ThemeProvider > */}
+        <Toaster position='bottom-right' />
+      </TanstackProvider>
     </SessionProvider>
   );
 };

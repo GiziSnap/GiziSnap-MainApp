@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -13,9 +12,10 @@ import { Form } from '@/components/ui/form';
 import { LoginUserFormInner } from './LoginUserFormInner';
 import { loginUserFormSchema } from '../../schemas';
 import { type LoginUserFormSchema } from '../../types';
+import { signIn } from 'next-auth/react';
+import { useLogin } from '../../api/useLogin';
 
 export const LoginUserForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const form = useForm<LoginUserFormSchema>({
@@ -26,56 +26,63 @@ export const LoginUserForm = () => {
     },
   });
 
-  const onSubmit = async (values: LoginUserFormSchema) => {
-    setIsLoading(true);
+  const { mutate: login, isPending: isLoginPending } = useLogin({
+    onSuccess: () => {
+      toast.success('Login berhasil');
+      router.push('/dashboard');
+      return Promise.resolve()
+    },
+    onError: () => {
+      toast.error('Login gagal karena username atau kata sandi salah.');
+      return Promise.resolve()
+    },
+  })
 
-    try {
-      // Tambahkan logging
-      console.log('Login attempt:', values);
+  const onSubmit = async (values: LoginUserFormSchema) => login(values);
 
-      // Cek manual ke backend terlebih dahulu
-      const backendResponse = await axios.post(
-        `https://rails-service-gizisnap.onrender.com/session`,
-        {
-          username: values.username,
-          password: values.password
-        }
-      );
 
-      console.log('Backend Response:', backendResponse.data);
+  // const onSubmit = async (values: LoginUserFormSchema) => {
+  //   setIsLoading(true);
+  //   try {
+  //     console.log('Login attempt:', values);
 
-      // Jika backend berhasil, lakukan NextAuth signin
-      const result = await signIn('credentials', {
-        redirect: false,
-        username: values.username,
-        password: values.password,
-      });
+  //     const backendResponse = await axios.post(
+  //       `secret/session`,
+  //       {
+  //         username: values.username,
+  //         password: values.password
+  //       }
+  //     );
 
-      console.log('NextAuth Signin Result:', result);
+  //     console.log('Backend Response:', backendResponse.data);
 
-      if (result?.error) {
-        toast.error('Login Gagal', {
-          description: result.error || 'username atau kata sandi salah.',
-        });
-      } else {
-        toast.success('Login Berhasil', {
-          description: 'Anda akan dialihkan ke dashboard.',
-        });
+  //     const result = await signIn('credentials', {
+  //       redirect: false,
+  //       username: values.username,
+  //       password: values.password,
+  //     });
 
-        // Pastikan redirect bekerja
-        router.push('/dashboard');
-      }
-    } catch (error) {
-      // Tangkap dan log error dengan detail
-      console.error('Login Error:', error);
+  //     console.log('NextAuth Signin Result:', result);
 
-      toast.error('Terjadi Kesalahan', {
-        description: 'Gagal melakukan login. Silakan coba lagi.',
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     if (result?.error) {
+  //       toast.error('Login Gagal', {
+  //         description: result.error || 'username atau kata sandi salah.',
+  //       });
+  //     } else {
+  //       toast.success('Login Berhasil', {
+  //         description: 'Anda akan dialihkan ke dashboard.',
+  //       });
+  //       router.push('/dashboard');
+  //     }
+  //   } catch (error) {
+  //     console.error('Login Error:', error);
+  //     toast.error('Login Gagal', {
+  //       description: 'Terjadi kesalahan saat login.',
+  //     });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <Form {...form}>
@@ -86,10 +93,10 @@ export const LoginUserForm = () => {
       <Button
         form="login-user-form"
         type="submit"
-        disabled={!form.formState.isValid || isLoading}
+        disabled={!form.formState.isValid || isLoginPending}
         className="w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white transition-colors duration-300 ease-in-out hover:scale-[1.02] hover:bg-green-700 active:scale-[0.98]"
       >
-        {isLoading ? 'Memproses...' : 'Masuk'}
+        {isLoginPending ? 'Memproses...' : 'Masuk'}
       </Button>
     </Form>
   );

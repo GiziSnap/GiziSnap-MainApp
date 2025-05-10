@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export default withAuth(
   function middleware(req) {
-    // Tambahkan logika redirect jika diperlukan
+    
     return NextResponse.next();
   },
   {
@@ -19,6 +19,5 @@ export default withAuth(
 export const config = {
   matcher: [
     '/dashboard/:path*',
-    '/profile/:path*'
   ]
 };

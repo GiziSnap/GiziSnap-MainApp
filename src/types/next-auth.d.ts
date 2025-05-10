@@ -7,18 +7,21 @@ import { type DefaultSession } from "next-auth";
 declare module "next-auth" {
   interface User {
     id: string;
-    name?: string | null;
-    email?: string | null;
+    username?: string | null;
+    email_address?: string | null;
     accessToken?: string;
   }
 
   interface Session {
     user: {
       id: string;
-      name?: string | null;
-      email?: string | null;
+      username?: string | null;
+      email_address?: string | null;
     } & DefaultSession["user"];
     accessToken?: string;
+    id: string;
+    username: string;
+    email_address: string;
   }
 }
 

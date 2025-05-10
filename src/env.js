@@ -9,7 +9,9 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
     NEXTAUTH_SECRET: z.string(),
-    NEXT_AUTH_BACKEND_URL: z.string(), // Karena bersifat opsional
+    NEXT_AUTH_BACKEND_URL: z.string().url(),
+    GITHUB_SECRET: z.string(),
+    GITHUB_ID: z.string(),
   },
 
   /**
@@ -19,7 +21,8 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_APP_URL: z.string(),
-    NEXT_PUBLIC_APP_NAME: z.string()
+    NEXT_PUBLIC_APP_NAME: z.string(),
+    NEXT_PUBLIC_AUTH_BACKEND_URL: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -34,6 +37,9 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXT_AUTH_BACKEND_URL: process.env.NEXT_AUTH_BACKEND_URL,
+    GITHUB_SECRET: process.env.GITHUB_SECRET,
+    GITHUB_ID: process.env.GITHUB_ID,
+    NEXT_PUBLIC_AUTH_BACKEND_URL: process.env.NEXT_PUBLIC_AUTH_BACKEND_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -9,6 +9,7 @@ type DashboardLayoutProps = {
 import { type Metadata } from 'next';
 import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { getServerSession } from 'next-auth';
 
 export const DashboardLayoutMetadata: Metadata = {
   title: 'Dashboard',

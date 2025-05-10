@@ -33,6 +33,19 @@ const config = {
         ]
     },
 
+    // async rewrites() {
+    //     return [
+    //         {
+    //             source: '/api/registers',
+    //             destination: `${env.NEXT_AUTH_BACKEND_URL}/registers`
+    //         },
+    //         {
+    //             source: '/api/session',
+    //             destination: `${env.NEXT_AUTH_BACKEND_URL}/session`
+    //         }
+    //     ]
+    // },
+
     // Webpack konfigurasi tambahan
     // webpack: (config, { isServer }) => {
     //     if (!isServer) {

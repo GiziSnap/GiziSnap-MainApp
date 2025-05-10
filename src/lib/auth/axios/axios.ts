@@ -2,7 +2,7 @@ import axios, { type AxiosError } from 'axios';
 import { env } from '@/env';
 
 const authService = axios.create({
-  baseURL: env.NEXT_AUTH_BACKEND_URL,
+  baseURL: process.env.NEXTAUTH_URL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
