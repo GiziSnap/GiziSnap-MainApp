@@ -1,7 +1,5 @@
-
 import Link from 'next/link';
 import { Heading } from '../ui/heading';
-import { ThemeToggle } from '../action/ThemeToggle';
 import { SidebarTrigger } from '../ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {

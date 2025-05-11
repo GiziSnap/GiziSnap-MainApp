@@ -2,17 +2,14 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import axios from 'axios';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { LoginUserFormInner } from './LoginUserFormInner';
 import { loginUserFormSchema } from '../../schemas';
 import { type LoginUserFormSchema } from '../../types';
-import { signIn } from 'next-auth/react';
 import { useLogin } from '../../api/useLogin';
 
 export const LoginUserForm = () => {
@@ -30,59 +27,15 @@ export const LoginUserForm = () => {
     onSuccess: () => {
       toast.success('Login berhasil');
       router.push('/dashboard');
-      return Promise.resolve()
+      return Promise.resolve();
     },
     onError: () => {
       toast.error('Login gagal karena username atau kata sandi salah.');
-      return Promise.resolve()
+      return Promise.resolve();
     },
-  })
+  });
 
   const onSubmit = async (values: LoginUserFormSchema) => login(values);
-
-
-  // const onSubmit = async (values: LoginUserFormSchema) => {
-  //   setIsLoading(true);
-  //   try {
-  //     console.log('Login attempt:', values);
-
-  //     const backendResponse = await axios.post(
-  //       `secret/session`,
-  //       {
-  //         username: values.username,
-  //         password: values.password
-  //       }
-  //     );
-
-  //     console.log('Backend Response:', backendResponse.data);
-
-  //     const result = await signIn('credentials', {
-  //       redirect: false,
-  //       username: values.username,
-  //       password: values.password,
-  //     });
-
-  //     console.log('NextAuth Signin Result:', result);
-
-  //     if (result?.error) {
-  //       toast.error('Login Gagal', {
-  //         description: result.error || 'username atau kata sandi salah.',
-  //       });
-  //     } else {
-  //       toast.success('Login Berhasil', {
-  //         description: 'Anda akan dialihkan ke dashboard.',
-  //       });
-  //       router.push('/dashboard');
-  //     }
-  //   } catch (error) {
-  //     console.error('Login Error:', error);
-  //     toast.error('Login Gagal', {
-  //       description: 'Terjadi kesalahan saat login.',
-  //     });
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
 
   return (
     <Form {...form}>

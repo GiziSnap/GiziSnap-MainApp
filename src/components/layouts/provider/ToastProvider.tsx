@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from '@/components/ui/sonner';
 
 export default function ToastProvider() {
-    return <Toaster position="top-center" />
+  return <Toaster position="top-center" />;
 }
