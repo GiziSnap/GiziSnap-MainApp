@@ -9,9 +9,6 @@ import { Button } from '@/components/ui/button';
 import type { RegisterUserFormSchema } from '../../types';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import axios from 'axios';
-import { useState } from 'react';
-import { signIn } from 'next-auth/react';
 import { useRegister } from '../../api/useRegister';
 
 export const RegisterUserForm = () => {
@@ -31,13 +28,13 @@ export const RegisterUserForm = () => {
     onSuccess: () => {
       toast.success('Pendaftaran berhasil');
       router.push('/auth/login');
-      return Promise.resolve()
+      return Promise.resolve();
     },
     onError: () => {
       toast.error('Pendaftaran gagal');
-      return Promise.resolve()
+      return Promise.resolve();
     },
-  })
+  });
 
   const onSubmit = async (values: RegisterUserFormSchema) => register(values);
 
@@ -50,7 +47,11 @@ export const RegisterUserForm = () => {
       <Button
         type="submit"
         form="create-user-form"
-        disabled={!form.formState.isValid || form.formState.isSubmitting || isRegisterPending}
+        disabled={
+          !form.formState.isValid ||
+          form.formState.isSubmitting ||
+          isRegisterPending
+        }
         className="w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isRegisterPending ? 'Loading...' : 'Daftar'}

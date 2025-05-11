@@ -110,7 +110,6 @@ export default function RegisterUserFormInner({
           </FormItem>
         )}
       />
-
     </form>
   );
 }

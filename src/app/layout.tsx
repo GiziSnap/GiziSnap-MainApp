@@ -1,10 +1,7 @@
 import { AppProvider } from '@/components/layouts/AppProvider';
-import { Providers } from '@/components/layouts/provider/Providers';
-import ToastProvider from '@/components/layouts/provider/ToastProvider';
 import '@/styles/globals.css';
 
 import { type Metadata } from 'next';
-import { SessionProvider } from 'next-auth/react';
 import { Geist } from 'next/font/google';
 
 export const metadata: Metadata = {
@@ -28,9 +25,7 @@ export default function RootLayout({
       className={`${geist.variable}`}
     >
       <body>
-        <AppProvider>
-          {children}
-        </AppProvider>
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

@@ -15,13 +15,13 @@ import { useFormContext } from 'react-hook-form';
 import type { LoginUserFormSchema } from '../../types';
 
 type LoginUserFormInnerProps = {
-  formId: string
-  onSubmit: () => void
+  formId: string;
+  onSubmit: () => void;
 };
 
 export const LoginUserFormInner = ({
   formId,
-  onSubmit
+  onSubmit,
 }: LoginUserFormInnerProps) => {
   const form = useFormContext<LoginUserFormSchema>();
 
@@ -32,11 +32,7 @@ export const LoginUserFormInner = ({
   };
 
   return (
-    <form
-      id={formId}
-      onSubmit={onSubmit}
-      className="mb-4 space-y-4"
-    >
+    <form id={formId} onSubmit={onSubmit} className="mb-4 space-y-4">
       <FormField
         control={form.control}
         name="username"

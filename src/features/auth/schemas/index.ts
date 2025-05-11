@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-
 export const registerUserFormSchema = z.object({
   username: z
     .string()
@@ -10,8 +9,8 @@ export const registerUserFormSchema = z.object({
   password: z
     .string()
     .min(8, { message: 'Kata sandi minimal 8 karakter' })
-    .max(50, { message: 'Kata sandi maksimal 50 karakter' })
-})
+    .max(50, { message: 'Kata sandi maksimal 50 karakter' }),
+});
 
 // export const registerUserFormSchema = z
 //   .object({
@@ -48,11 +47,4 @@ export const loginUserFormSchema = z.object({
     .string()
     .min(8, { message: 'Kata sandi minimal 8 karakter' })
     .max(50, { message: 'Kata sandi maksimal 50 karakter' })
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-      {
-        message:
-          'Kata sandi harus mengandung huruf besar, huruf kecil, angka, dan karakter spesial',
-      }
-    ),
 });

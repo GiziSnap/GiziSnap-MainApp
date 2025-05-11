@@ -1,10 +1,10 @@
-import NextAuth from "next-auth";
-import { options } from "./options";
-import type { NextApiHandler } from "next";
+import { options } from '@/auth';
+import NextAuth from 'next-auth';
 
-const handler = NextAuth(options) as NextApiHandler;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const handler = NextAuth(options);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
 
 // import NextAuth from "next-auth";
 // import CredentialsProvider from "next-auth/providers/credentials";

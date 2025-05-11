@@ -1,5 +1,4 @@
 import { Toaster } from 'sonner';
-import { ThemeProvider } from './ThemeProvider';
 import { SessionProvider } from 'next-auth/react';
 import { TanstackProvider } from './TanStackProvider';
 
@@ -12,7 +11,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
     <SessionProvider>
       <TanstackProvider>
         {children}
-        <Toaster position='bottom-right' />
+        <Toaster position="bottom-right" />
       </TanstackProvider>
     </SessionProvider>
   );

@@ -8,13 +8,8 @@ import {
 } from '@/components/ui/sidebar';
 import { SidebarItem } from './SidebarItem';
 import { renderElements } from '@/utils/render-elements';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
 import { ChevronDown } from 'lucide-react';
-import { icons } from 'lucide-react';
+import { type icons } from 'lucide-react';
 import { useState } from 'react';
 
 type IconName = keyof typeof icons;
