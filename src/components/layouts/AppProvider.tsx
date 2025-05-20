@@ -1,7 +1,7 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { forwardRef } from 'react';
-import { Toaster as Sooner } from 'sonner';
-// import { Toaster } from "../ui/toaster";
 import { Providers } from './provider/Providers';
 
 type AppProviderProps = {
@@ -14,8 +14,6 @@ export const AppProvider = forwardRef<HTMLDivElement, AppProviderProps>(
     return (
       <main ref={ref} className={cn(className)}>
         <Providers>{children}</Providers>
-        {/* <Toaster /> */}
-        <Sooner position="top-center" />
       </main>
     );
   }

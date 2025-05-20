@@ -1,3 +1,8 @@
+'use client';
+
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
+
 import {
   FormControl,
   FormField,
@@ -7,9 +12,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useFormContext } from 'react-hook-form';
-import { type LoginUserFormSchema } from '../../types';
-import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import type { LoginUserFormSchema } from '../../types';
 
 type LoginUserFormInnerProps = {
   formId: string;
@@ -20,29 +23,26 @@ export const LoginUserFormInner = ({
   formId,
   onSubmit,
 }: LoginUserFormInnerProps) => {
-  const [showPassword, setShowPassword] = useState(false);
-
   const form = useFormContext<LoginUserFormSchema>();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   return (
-    <form
-      id={formId}
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="mb-4 space-y-4"
-    >
+    <form id={formId} onSubmit={onSubmit} className="mb-4 space-y-4">
       <FormField
         control={form.control}
-        name="email"
+        name="username"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel>Username</FormLabel>
             <FormControl>
               <Input
-                type="email"
-                placeholder="Masukkan email Anda"
+                type="text"
+                placeholder="Masukkan Username Anda"
                 {...field}
                 className="border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
               />

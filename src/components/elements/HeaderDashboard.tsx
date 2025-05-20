@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Heading } from '../ui/heading';
-import { ThemeToggle } from '../action/ThemeToggle';
 import { SidebarTrigger } from '../ui/sidebar';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -11,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { SignOutAlert } from '../action/SignOut';
 
 type HeaderDashboardProps = {
   brandName?: string;
@@ -34,11 +34,6 @@ export const HeaderDashboard = ({
         </Link>
       </div>
       <div className="flex items-center gap-5">
-        {/* Theme toggle hanya di desktop */}
-        <div className="hidden md:block">
-          <ThemeToggle />
-        </div>
-
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
             className="cursor-pointer outline-none focus:outline-none"
@@ -54,9 +49,6 @@ export const HeaderDashboard = ({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent>
-            <DropdownMenuItem className="md:hidden">
-              <ThemeToggle className="w-full" />
-            </DropdownMenuItem>
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
 
@@ -87,12 +79,7 @@ export const HeaderDashboard = ({
             <DropdownMenuSeparator />
 
             <DropdownMenuItem>
-              <button
-                className="text-destructive w-full text-left"
-                // onClick={handleLogout}
-              >
-                Logout
-              </button>
+              <SignOutAlert />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

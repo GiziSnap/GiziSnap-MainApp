@@ -1,4 +1,6 @@
-import { ThemeProvider } from './ThemeProvider';
+import { Toaster } from 'sonner';
+import { SessionProvider } from 'next-auth/react';
+import { TanstackProvider } from './TanStackProvider';
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -6,13 +8,11 @@ type ProvidersProps = {
 
 export const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
+    <SessionProvider>
+      <TanstackProvider>
+        {children}
+        <Toaster position="bottom-right" />
+      </TanstackProvider>
+    </SessionProvider>
   );
 };

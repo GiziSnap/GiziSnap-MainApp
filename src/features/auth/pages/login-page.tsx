@@ -6,7 +6,6 @@ import Link from 'next/link';
 import bg_img1 from '@/../public/bg-img1.jpg';
 import { LoginUserForm } from '../component/form/LoginUserForm';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -15,14 +14,11 @@ export const LoginPage = () => {
   return (
     <PageContainer title="Login - GiziSnap">
       <div className="relative flex min-h-screen w-full">
-        <div className="absolute top-4 left-4 z-50 flex items-center justify-center rounded-full bg-white/80 ">
-          <Button
-            variant={'outline'}
-            onClick={() => router.push('/')}
-            className="flex h-12 w-12 items-center justify-center rounded-full"
-          >
-            <ArrowLeft size={24} />
-          </Button>
+        <div
+          className="absolute top-4 left-4 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/65 transition-all hover:bg-white/80"
+          onClick={() => router.push('/')}
+        >
+          <ArrowLeft size={19} />
         </div>
         <div className="absolute inset-0 z-0">
           <Image
@@ -44,6 +40,7 @@ export const LoginPage = () => {
               </p>
             </CardHeader>
             <CardContent>
+              {/* User Login Form */}
               <LoginUserForm />
               <div className="mt-4 text-center">
                 <p className="text-sm text-gray-700">

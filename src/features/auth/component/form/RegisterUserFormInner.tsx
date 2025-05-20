@@ -57,7 +57,7 @@ export default function RegisterUserFormInner({
 
       <FormField
         control={form.control}
-        name="email"
+        name="email_address"
         render={({ field }) => (
           <FormItem>
             <FormLabel>Email</FormLabel>
@@ -99,43 +99,6 @@ export default function RegisterUserFormInner({
                   }
                 >
                   {showPassword.password ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
-                </button>
-              </div>
-            </FormControl>
-            <FormMessage className="mt-1 text-xs text-red-500" />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="confirmPassword"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Konfirmasi Kata Sandi</FormLabel>
-            <FormControl>
-              <div className="relative">
-                <Input
-                  type={showPassword.confirmPassword ? 'text' : 'password'}
-                  placeholder="Konfirmasi kata sandi Anda"
-                  {...field}
-                  className="border-green-300 pr-10 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
-                />
-                <button
-                  type="button"
-                  onClick={() => togglePasswordVisibility('confirmPassword')}
-                  className="absolute inset-y-0 right-0 flex items-center px-3 text-green-600"
-                  aria-label={
-                    showPassword.confirmPassword
-                      ? 'Sembunyikan kata sandi'
-                      : 'Tampilkan kata sandi'
-                  }
-                >
-                  {showPassword.confirmPassword ? (
                     <EyeOff className="h-5 w-5" />
                   ) : (
                     <Eye className="h-5 w-5" />

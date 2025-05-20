@@ -1,16 +1,12 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
-@layer components {
-  .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-}
 
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -133,3 +129,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+.sidebar-submenu-enter {  
+  max-height: 0;  
+  opacity: 0;  
+  overflow: hidden;  
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;  
+}  
+
+.sidebar-submenu-enter-active {  
+  max-height: 500px; /* Sesuaikan dengan tinggi maksimum submenu */  
+  opacity: 1;  
+}  
+
+.sidebar-submenu-exit {  
+  max-height: 500px;  
+  opacity: 1;  
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;  
+}  
+
+.sidebar-submenu-exit-active {  
+  max-height: 0;  
+  opacity: 0;  
+  overflow: hidden;  
+}  

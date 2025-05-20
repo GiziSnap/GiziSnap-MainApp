@@ -1,6 +1,6 @@
 'use client';
 
-import { PageContainer, SectionContainer } from '@/components/layouts';
+import { PageContainer } from '@/components/layouts';
 import { FeaturesSection } from '../component/section/FeatureSection';
 import { Footer } from '../component/section/Footer';
 import { HeroSection } from '../component/section/HeroSection';

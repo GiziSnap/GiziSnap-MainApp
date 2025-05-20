@@ -5,11 +5,13 @@ import { SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type icons } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { SidebarSubMenu } from './SidebarSubMenu';
 
 type SidebarItemProps = {
   url: string;
   title: string;
   icon: keyof typeof icons;
+  submenu?: SidebarItemProps[];
 };
 
 export const SidebarItem = (props: SidebarItemProps) => {
@@ -24,6 +26,7 @@ export const SidebarItem = (props: SidebarItemProps) => {
           <span>{props.title}</span>
         </Link>
       </SidebarMenuButton>
+      <SidebarSubMenu submenu={props.submenu ?? []} />
     </SidebarMenuItem>
   );
 };
