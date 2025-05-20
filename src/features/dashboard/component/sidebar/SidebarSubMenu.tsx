@@ -10,6 +10,7 @@ import { type icons } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { renderElements } from '@/utils/render-elements';
+import { useState } from 'react';
 
 type SubMenuItem = {
   title: string;
@@ -23,6 +24,7 @@ type SidebarSubMenuProps = {
 
 export const SidebarSubMenu = ({ submenu }: SidebarSubMenuProps) => {
   const pathName = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
     <SidebarMenuSub>

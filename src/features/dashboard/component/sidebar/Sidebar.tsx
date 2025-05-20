@@ -15,7 +15,7 @@ import { renderElements } from '@/utils/render-elements';
 
 export const Sidebar = () => {
   return (
-    <SidebarComponent collapsible="icon">
+    <SidebarComponent collapsible="offcanvas">
       <SidebarContent>
         {renderElements({
           of: sidebarMenu,

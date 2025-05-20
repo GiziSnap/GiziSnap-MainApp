@@ -46,5 +46,5 @@ export const loginUserFormSchema = z.object({
   password: z
     .string()
     .min(8, { message: 'Kata sandi minimal 8 karakter' })
-    .max(50, { message: 'Kata sandi maksimal 50 karakter' })
+    .max(50, { message: 'Kata sandi maksimal 50 karakter' }),
 });
