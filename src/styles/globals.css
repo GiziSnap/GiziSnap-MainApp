@@ -130,26 +130,12 @@
   }
 }
 
-.sidebar-submenu-enter {  
-  max-height: 0;  
-  opacity: 0;  
-  overflow: hidden;  
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;  
-}  
+.input-number {
+  -moz-appearance: textfield; /* untuk Firefox */
+}
 
-.sidebar-submenu-enter-active {  
-  max-height: 500px; /* Sesuaikan dengan tinggi maksimum submenu */  
-  opacity: 1;  
-}  
-
-.sidebar-submenu-exit {  
-  max-height: 500px;  
-  opacity: 1;  
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;  
-}  
-
-.sidebar-submenu-exit-active {  
-  max-height: 0;  
-  opacity: 0;  
-  overflow: hidden;  
-}  
+.input-number::-webkit-inner-spin-button,
+.input-number::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* untuk Chrome dan Safari */
+  margin: 0; /* menghilangkan margin */
+}

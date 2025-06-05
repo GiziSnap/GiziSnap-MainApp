@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Heading } from '../ui/heading';
 import { SidebarTrigger } from '../ui/sidebar';
@@ -11,39 +12,56 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { SignOutAlert } from '../action/SignOut';
+import { useUserData } from '@/features/dashboard/utils/useUserData';
 
-type HeaderDashboardProps = {
-  brandName?: string;
-  userName?: string;
-  userAvatar?: string;
-  userAvatarFallback?: string;
-};
+export const HeaderDashboard = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
 
-export const HeaderDashboard = ({
-  brandName = 'GiziSnap',
-  userName = 'User',
-  userAvatar = 'https://github.com/shadcn.png',
-  userAvatarFallback = 'CN',
-}: HeaderDashboardProps) => {
+  const { userInfo } = useUserData();
+
+  const dataUser = {
+    brandName: 'GiziSnap',
+    userName: userInfo.username ?? 'User ',
+    userAvatar: 'https://github.com/shadcn.png',
+    userAvatarFallback: userInfo.username ?? 'User',
+  };
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header className="flex w-full items-center justify-between border-b px-5 py-3">
-      <div className="flex items-center gap-5">
+    <header
+      className={`sticky top-0 z-50 flex w-full items-center justify-between border-b px-5 py-3 transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'}`}
+    >
+      <div className='flex items-center gap-5'>
         <SidebarTrigger />
         <Link href={'/'}>
-          <Heading size={'h4'}>{brandName}</Heading>
+          <Heading size={'h4'}>{dataUser.brandName}</Heading>
         </Link>
       </div>
-      <div className="flex items-center gap-5">
+      <div className='flex items-center gap-5'>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
-            className="cursor-pointer outline-none focus:outline-none"
-            aria-label="User Menu"
+            className='cursor-pointer outline-none focus:outline-none'
+            aria-label='User Menu'
           >
-            <div className="flex items-center gap-2">
-              <span className="hidden text-sm md:block">Hello, {userName}</span>
-              <Avatar className="h-8 w-8">
-                <AvatarImage src={userAvatar} alt={`@${userName}`} />
-                <AvatarFallback>{userAvatarFallback}</AvatarFallback>
+            <div className='flex items-center gap-2'>
+              <span className='hidden text-sm md:block'>
+                Hello, {dataUser.userName}
+              </span>
+              <Avatar className='h-8 w-8'>
+                <AvatarImage
+                  src={dataUser.userAvatar}
+                  alt={`@${dataUser.userName}`}
+                />
+                <AvatarFallback>{dataUser.userAvatarFallback}</AvatarFallback>
               </Avatar>
             </div>
           </DropdownMenuTrigger>
@@ -53,25 +71,25 @@ export const HeaderDashboard = ({
             <DropdownMenuSeparator />
 
             <DropdownMenuItem>
-              <Link href="/profile" className="w-full">
+              <Link href='/profile' className='w-full'>
                 Profile
               </Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
-              <Link href="/billing" className="w-full">
+              <Link href='/billing' className='w-full'>
                 Billing
               </Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
-              <Link href="/team" className="w-full">
+              <Link href='/team' className='w-full'>
                 Team
               </Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
-              <Link href="/subscription" className="w-full">
+              <Link href='/subscription' className='w-full'>
                 Subscription
               </Link>
             </DropdownMenuItem>

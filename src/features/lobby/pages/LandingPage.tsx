@@ -1,17 +1,17 @@
 'use client';
 
 import { PageContainer } from '@/components/layouts';
-import { FeaturesSection } from '../component/section/FeatureSection';
-import { Footer } from '../component/section/Footer';
-import { HeroSection } from '../component/section/HeroSection';
-import { Navbar } from '../component/section/Navbar';
-import { TabsSection } from '../component/section/TabsSection';
+import { FeaturesSection } from '../components/section/FeatureSection';
+import { Footer } from '../components/section/Footer';
+import { HeroSection } from '../components/section/HeroSection';
+import { Navbar } from '../components/section/Navbar';
+import { TabsSection } from '../components/section/TabsSection';
 
 export const LandingPage = () => {
   return (
     <PageContainer>
       <Navbar />
-      <div className="pt-16">
+      <div className='pt-16'>
         <HeroSection />
         <FeaturesSection />
         <TabsSection />

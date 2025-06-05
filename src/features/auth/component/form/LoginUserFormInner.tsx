@@ -32,19 +32,19 @@ export const LoginUserFormInner = ({
   };
 
   return (
-    <form id={formId} onSubmit={onSubmit} className="mb-4 space-y-4">
+    <form id={formId} onSubmit={onSubmit} className='mb-4 space-y-4'>
       <FormField
         control={form.control}
-        name="username"
+        name='username'
         render={({ field }) => (
           <FormItem>
             <FormLabel>Username</FormLabel>
             <FormControl>
               <Input
-                type="text"
-                placeholder="Masukkan Username Anda"
+                type='text'
+                placeholder='Masukkan Username Anda'
                 {...field}
-                className="border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
+                className='border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500'
               />
             </FormControl>
             <FormMessage />
@@ -54,22 +54,22 @@ export const LoginUserFormInner = ({
 
       <FormField
         control={form.control}
-        name="password"
+        name='password'
         render={({ field }) => (
           <FormItem>
             <FormLabel>Kata Sandi</FormLabel>
             <FormControl>
-              <div className="relative">
+              <div className='relative'>
                 <Input
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Masukkan kata sandi Anda"
+                  placeholder='Masukkan kata sandi Anda'
                   {...field}
-                  className="border-green-300 pr-10 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
+                  className='border-green-300 pr-10 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500'
                 />
                 <button
-                  type="button"
+                  type='button'
                   onClick={togglePasswordVisibility}
-                  className="absolute inset-y-0 right-0 flex items-center px-3 text-green-600"
+                  className='absolute inset-y-0 right-0 flex items-center px-3 text-green-600'
                   aria-label={
                     showPassword
                       ? 'Sembunyikan kata sandi'
@@ -77,9 +77,9 @@ export const LoginUserFormInner = ({
                   }
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
+                    <EyeOff className='h-5 w-5' />
                   ) : (
-                    <Eye className="h-5 w-5" />
+                    <Eye className='h-5 w-5' />
                   )}
                 </button>
               </div>

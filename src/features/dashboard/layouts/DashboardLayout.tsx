@@ -9,7 +9,8 @@ type DashboardLayoutProps = {
 import { type Metadata } from 'next';
 import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { Sidebar } from '../component/sidebarv2/components/Sidebar';
+import { Sidebar } from '../components/sidebar/components/Sidebar';
+import { useSession } from 'next-auth/react';
 
 export const DashboardLayoutMetadata: Metadata = {
   title: 'Dashboard',

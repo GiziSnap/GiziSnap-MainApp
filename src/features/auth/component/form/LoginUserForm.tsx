@@ -24,14 +24,12 @@ export const LoginUserForm = () => {
   });
 
   const { mutate: login, isPending: isLoginPending } = useLogin({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('Login berhasil');
       router.push('/dashboard');
-      return Promise.resolve();
     },
-    onError: () => {
+    onError: async () => {
       toast.error('Login gagal karena username atau kata sandi salah.');
-      return Promise.resolve();
     },
   });
 
@@ -40,14 +38,14 @@ export const LoginUserForm = () => {
   return (
     <Form {...form}>
       <LoginUserFormInner
-        formId="login-user-form"
+        formId='login-user-form'
         onSubmit={form.handleSubmit(onSubmit)}
       />
       <Button
-        form="login-user-form"
-        type="submit"
-        disabled={!form.formState.isValid || isLoginPending}
-        className="w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white transition-colors duration-300 ease-in-out hover:scale-[1.02] hover:bg-green-700 active:scale-[0.98]"
+        form='login-user-form'
+        type='submit'
+        disabled={isLoginPending}
+        className='w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white transition-colors duration-300 ease-in-out hover:scale-[1.02] hover:bg-green-700 active:scale-[0.98]'
       >
         {isLoginPending ? 'Memproses...' : 'Masuk'}
       </Button>

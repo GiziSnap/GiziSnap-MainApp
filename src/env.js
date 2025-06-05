@@ -7,11 +7,13 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(['development', 'test', 'production']),
+    NODE_ENV: z
+      .enum(['development', 'test', 'production'])
+      .default('development'),
     NEXTAUTH_SECRET: z.string(),
     NEXT_AUTH_BACKEND_URL: z.string().url(),
-    GITHUB_SECRET: z.string(),
-    GITHUB_ID: z.string(),
+    // GITHUB_SECRET: z.string(),
+    // GITHUB_ID: z.string(),
   },
 
   /**
@@ -23,6 +25,7 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_URL: z.string(),
     NEXT_PUBLIC_APP_NAME: z.string(),
     NEXT_PUBLIC_AUTH_BACKEND_URL: z.string(),
+    NEXT_PUBLIC_ML_API_URL: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -37,15 +40,20 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXT_AUTH_BACKEND_URL: process.env.NEXT_AUTH_BACKEND_URL,
-    GITHUB_SECRET: process.env.GITHUB_SECRET,
-    GITHUB_ID: process.env.GITHUB_ID,
+    // GITHUB_SECRET: process.env.GITHUB_SECRET,
+    // GITHUB_ID: process.env.GITHUB_ID,
     NEXT_PUBLIC_AUTH_BACKEND_URL: process.env.NEXT_PUBLIC_AUTH_BACKEND_URL,
+    NEXT_PUBLIC_ML_API_URL: process.env.NEXT_PUBLIC_ML_API_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
    * useful for Docker builds.
    */
-  skipValidation: !!process.env.SKIP_ENV_VALIDATION,
+  onValidationError: (error) => {
+    console.error('Environment variable validation error:', error);
+    throw new Error('Invalid environment variables');
+  },
+  // skipValidation: !!process.env.SKIP_ENV_VALIDATION,
   /**
    * Makes it so that empty strings are treated as undefined. `SOME_VAR: z.string()` and
    * `SOME_VAR=''` will throw an error.

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { signOut } from 'next-auth/react';
 import {
@@ -12,20 +14,30 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { DoorOpen } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const SignOutAlert = () => {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const router = useRouter(); // Move this to the top for better organization
 
   const handleSignOut = () => {
-    void signOut();
     setIsAlertOpen(false);
+    signOut({ redirect: false })
+      .then(() => {
+        toast.success('Anda telah berhasil keluar.');
+        router.push('/');
+      })
+      .catch(() => {
+        toast.error('Gagal keluar. Silakan coba lagi.');
+      });
   };
 
   return (
-    <div className="w-full" onClick={(e) => e.stopPropagation()}>
+    <div className='w-full' onClick={(e) => e.stopPropagation()}>
       <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-        <AlertDialogTrigger className="flex items-center gap-2 rounded-sm bg-red-500 px-3 py-2 text-white hover:cursor-pointer hover:bg-red-600">
-          <DoorOpen className="text-white" />
+        <AlertDialogTrigger className='flex items-center gap-2'>
+          <DoorOpen className='h-4 w-4' />
           Logout
         </AlertDialogTrigger>
         <AlertDialogContent>
@@ -45,10 +57,10 @@ export const SignOutAlert = () => {
               Batal
             </AlertDialogCancel>
             <AlertDialogAction
-              className="bg-red-500 hover:bg-red-600"
+              className='bg-red-500 hover:bg-red-600'
               onClick={(e) => {
                 e.stopPropagation();
-                handleSignOut();
+                handleSignOut(); // Call the sign-out handler
               }}
             >
               Lanjutkan

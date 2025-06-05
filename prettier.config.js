@@ -2,10 +2,15 @@
 const config = {
   plugins: ['prettier-plugin-tailwindcss'],
   singleQuote: true,
-  trailingComma: 'es5',
+  trailingComma: 'all',
   tabWidth: 2,
   semi: true,
   printWidth: 80,
+  jsxSingleQuote: true,
+  bracketSpacing: true,
+  arrowParens: 'always',
+  endOfLine: 'lf',
+  htmlWhitespaceSensitivity: 'ignore',
 };
 
 export default config;

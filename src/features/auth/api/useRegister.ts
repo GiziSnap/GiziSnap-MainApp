@@ -3,7 +3,7 @@ import type { RegisterUserFormSchema } from '../types';
 import { useMutation } from '@tanstack/react-query';
 import type { ApiResponse } from '@/types/api';
 import type { UserResponse } from '../types/user';
-import authAxios from '@/lib/auth/axios/authAxios';
+import authAxios from '@/lib/axios/authAxios';
 
 export const useRegister = ({ onMutate, onSuccess, onError }: ApiProps) => {
   return useMutation({
@@ -11,7 +11,7 @@ export const useRegister = ({ onMutate, onSuccess, onError }: ApiProps) => {
     mutationFn: async (values: RegisterUserFormSchema) => {
       const response = await authAxios.post<ApiResponse<UserResponse>>(
         '/registers',
-        values
+        values,
       );
       return response.data;
     },

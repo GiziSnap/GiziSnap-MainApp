@@ -16,7 +16,7 @@ export const AppProvider = forwardRef<HTMLDivElement, AppProviderProps>(
         <Providers>{children}</Providers>
       </main>
     );
-  }
+  },
 );
 
 AppProvider.displayName = 'AppProvider';

@@ -7,6 +7,9 @@ import { env } from './src/env.js';
 
 /** @type {import("next").NextConfig} */
 const config = {
+  images: {
+    domains: ['github.com', 'dummyimage.com'],
+  },
   async headers() {
     return [
       {
@@ -29,6 +32,14 @@ const config = {
             value: 'true',
           },
         ],
+      },
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/auth/login',
+        destination: '/auth/login',
       },
     ];
   },

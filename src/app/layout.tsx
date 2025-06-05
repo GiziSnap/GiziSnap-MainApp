@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       suppressHydrationWarning={true}
-      lang="en"
+      lang='en'
       className={`${geist.variable}`}
     >
       <body>

@@ -1,6 +1,7 @@
 import { env } from '@/env';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { jwtDecode } from 'jwt-decode';
 
 type User = {
   id: string;
@@ -8,6 +9,12 @@ type User = {
   email_address: string;
   accessToken: string;
   password: string;
+};
+
+type DecodedToken = {
+  user_id: string;
+  username: string;
+  email: string;
 };
 
 export const options: NextAuthOptions = {
@@ -25,13 +32,14 @@ export const options: NextAuthOptions = {
       async authorize(credentials, req) {
         try {
           const clientIP =
-            (req?.headers?.['x-forwarded-for'] as string) ?? 'unknown';
-          const userAgent = (
-            req.headers ? req.headers['user-agent'] : undefined
-          ) as string | undefined;
+            (req?.headers?.['x-forwarded-for'] as string | undefined) ??
+            'unknown';
+          const userAgent: string | undefined = req.headers
+            ? (req.headers['user-agent'] as string | undefined)
+            : undefined;
 
           console.log(
-            `Login attempt from IP: ${clientIP}, User Agent: ${userAgent}`
+            `Login attempt from IP: ${clientIP}, User Agent: ${userAgent}`,
           );
 
           const res = await fetch(
@@ -47,7 +55,7 @@ export const options: NextAuthOptions = {
                 username: credentials?.username,
                 password: credentials?.password,
               }),
-            }
+            },
           );
 
           if (!res.ok) {
@@ -55,19 +63,32 @@ export const options: NextAuthOptions = {
             return null;
           }
 
-          const user = (await res.json()) as User;
+          const response = (await res.json()) as {
+            token?: string;
+            [key: string]: unknown;
+          };
+          console.log('Authenticated user:', response);
 
-          if (
-            user.id &&
-            user.username &&
-            user.email_address &&
-            user.accessToken
-          ) {
-            console.error('Authentication failed', res.status, res.statusText);
+          if (!response.token) {
+            console.error('Token is missing in user data', response);
             return null;
           }
 
-          return user;
+          let decodedToken: DecodedToken | null = null;
+          if (typeof response.token === 'string') {
+            decodedToken = (jwtDecode as (token: string) => DecodedToken)(
+              response.token,
+            );
+          } else {
+            console.error('Token is not a string:', response.token);
+            return null;
+          }
+          return {
+            id: decodedToken.user_id,
+            username: decodedToken.username,
+            email_address: decodedToken.email,
+            accessToken: response.token,
+          };
         } catch (error) {
           console.error('Authorize error:', error);
           return null;
@@ -98,13 +119,13 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
-  // cookies: {
-  //   sessionToken: {
-  //     name: 'sessionToken',
-  //     options: {
-  //       maxAge: 60 * 60 * 24 * 7, // 1 week
-  //     },
-  //   },
-  // },
+  cookies: {
+    sessionToken: {
+      name: 'sessionToken',
+      options: {
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+      },
+    },
+  },
   secret: env.NEXTAUTH_SECRET,
 };

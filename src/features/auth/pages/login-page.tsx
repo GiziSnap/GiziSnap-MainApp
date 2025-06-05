@@ -12,42 +12,42 @@ import { useRouter } from 'next/navigation';
 export const LoginPage = () => {
   const router = useRouter();
   return (
-    <PageContainer title="Login - GiziSnap">
-      <div className="relative flex min-h-screen w-full">
+    <PageContainer title='Login - GiziSnap'>
+      <div className='relative flex min-h-screen w-full'>
         <div
-          className="absolute top-4 left-4 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/65 transition-all hover:bg-white/80"
+          className='absolute top-4 left-4 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/65 transition-all hover:bg-white/80'
           onClick={() => router.push('/')}
         >
           <ArrowLeft size={19} />
         </div>
-        <div className="absolute inset-0 z-0">
+        <div className='absolute inset-0 z-0'>
           <Image
             src={bg_img1}
-            alt="GiziSnap Background"
-            layout="fill"
-            objectFit="cover"
+            alt='GiziSnap Background'
+            layout='fill'
+            objectFit='cover'
             quality={100}
           />
         </div>
-        <div className="relative z-10 flex w-full items-center justify-center px-4">
-          <Card className="w-full max-w-md border-0 bg-white/80 shadow-2xl backdrop-blur-sm">
-            <CardHeader className="pb-4 text-center">
-              <h2 className="text-2xl font-bold text-green-800">
+        <div className='relative z-10 flex w-full items-center justify-center px-4'>
+          <Card className='w-full max-w-md border-0 bg-white/80 shadow-2xl backdrop-blur-sm'>
+            <CardHeader className='pb-4 text-center'>
+              <h2 className='text-2xl font-bold text-green-800'>
                 Masuk ke GiziSnap
               </h2>
-              <p className="mt-2 text-sm text-gray-600">
+              <p className='mt-2 text-sm text-gray-600'>
                 Lanjutkan Perjalanan Gizi Anda
               </p>
             </CardHeader>
             <CardContent>
               {/* User Login Form */}
               <LoginUserForm />
-              <div className="mt-4 text-center">
-                <p className="text-sm text-gray-700">
+              <div className='mt-4 text-center'>
+                <p className='text-sm text-gray-700'>
                   Belum punya akun?{' '}
                   <Link
-                    href="/auth/register"
-                    className="font-semibold text-green-600 hover:underline"
+                    href='/auth/register'
+                    className='font-semibold text-green-600 hover:underline'
                   >
                     Daftar di sini
                   </Link>

@@ -25,20 +25,20 @@ export const PageContainer = forwardRef<
       isDashboard = false,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
-      <div className="h-full w-full">
+      <div className='h-full w-full'>
         {/* Uncomment the line below if you want to use HeaderDashboard instead of Header */}
         {withHeader && (isDashboard ? <HeaderDashboard /> : <Header />)}
 
         <main ref={ref} className={cn('flex flex-col', className)} {...props}>
           {children}
         </main>
-        {withFooter && <Footer className="mt-auto" />}
+        {withFooter && <Footer className='mt-auto' />}
       </div>
     );
-  }
+  },
 );
 
 PageContainer.displayName = 'PageContainer';

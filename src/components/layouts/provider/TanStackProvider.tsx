@@ -13,7 +13,7 @@ export const TanstackProvider: React.FC<React.PropsWithChildren> = ({
             refetchOnWindowFocus: false,
           },
         },
-      })
+      }),
   );
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

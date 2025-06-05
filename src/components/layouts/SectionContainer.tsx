@@ -21,7 +21,7 @@ export const SectionContainer = forwardRef<
       containerClassName,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div className={cn('relative h-full w-full', containerClassName)}>
@@ -44,7 +44,7 @@ export const SectionContainer = forwardRef<
         )}
       </div>
     );
-  }
+  },
 );
 
 SectionContainer.displayName = 'SectionContainer';

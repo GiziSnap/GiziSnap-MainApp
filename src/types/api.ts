@@ -12,6 +12,7 @@ export type ApiProps = {
   onMutate?: () => Promise<void>;
   onSuccess?: () => Promise<void>;
   onError?: (error: AxiosError<ApiErrorResponse>) => Promise<void>;
+  accessToken?: string;
 };
 
 export type ApiResponse<T> = {

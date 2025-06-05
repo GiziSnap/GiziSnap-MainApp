@@ -35,19 +35,19 @@ export default function RegisterUserFormInner({
     <form
       id={formId}
       onSubmit={form.handleSubmit(onSubmit)}
-      className="mb-4 space-y-4"
+      className='mb-4 space-y-4'
     >
       <FormField
         control={form.control}
-        name="username"
+        name='username'
         render={({ field }) => (
           <FormItem>
             <FormLabel>Username</FormLabel>
             <FormControl>
               <Input
-                placeholder="Buat username Anda"
+                placeholder='Buat username Anda'
                 {...field}
-                className="border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
+                className='border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500'
               />
             </FormControl>
             <FormMessage />
@@ -57,16 +57,16 @@ export default function RegisterUserFormInner({
 
       <FormField
         control={form.control}
-        name="email_address"
+        name='email_address'
         render={({ field }) => (
           <FormItem>
             <FormLabel>Email</FormLabel>
             <FormControl>
               <Input
-                type="email"
-                placeholder="Masukkan email Anda"
+                type='email'
+                placeholder='Masukkan email Anda'
                 {...field}
-                className="border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
+                className='border-green-300 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500'
               />
             </FormControl>
             <FormMessage />
@@ -76,22 +76,22 @@ export default function RegisterUserFormInner({
 
       <FormField
         control={form.control}
-        name="password"
+        name='password'
         render={({ field }) => (
           <FormItem>
             <FormLabel>Kata Sandi</FormLabel>
             <FormControl>
-              <div className="relative">
+              <div className='relative'>
                 <Input
                   type={showPassword.password ? 'text' : 'password'}
-                  placeholder="Buat kata sandi Anda"
+                  placeholder='Buat kata sandi Anda'
                   {...field}
-                  className="border-green-300 pr-10 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500"
+                  className='border-green-300 pr-10 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-green-500'
                 />
                 <button
-                  type="button"
+                  type='button'
                   onClick={() => togglePasswordVisibility('password')}
-                  className="absolute inset-y-0 right-0 flex items-center px-3 text-green-600"
+                  className='absolute inset-y-0 right-0 flex items-center px-3 text-green-600'
                   aria-label={
                     showPassword.password
                       ? 'Sembunyikan kata sandi'
@@ -99,14 +99,14 @@ export default function RegisterUserFormInner({
                   }
                 >
                   {showPassword.password ? (
-                    <EyeOff className="h-5 w-5" />
+                    <EyeOff className='h-5 w-5' />
                   ) : (
-                    <Eye className="h-5 w-5" />
+                    <Eye className='h-5 w-5' />
                   )}
                 </button>
               </div>
             </FormControl>
-            <FormMessage className="mt-1 text-xs text-red-500" />
+            <FormMessage className='mt-1 text-xs text-red-500' />
           </FormItem>
         )}
       />

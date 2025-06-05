@@ -49,7 +49,7 @@ export interface HeadingProps
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   (
     { className, variant, size, alignment, weight, as = 'h1', ...props },
-    ref
+    ref,
   ) => {
     const Component = as;
 
@@ -63,12 +63,12 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
             alignment,
             weight,
             className,
-          })
+          }),
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Heading.displayName = 'Heading';

@@ -41,18 +41,14 @@ export const RegisterUserForm = () => {
   return (
     <Form {...form}>
       <RegisterUserFormInner
-        formId="create-user-form"
+        formId='create-user-form'
         onSubmit={form.handleSubmit(onSubmit)}
       />
       <Button
-        type="submit"
-        form="create-user-form"
-        disabled={
-          !form.formState.isValid ||
-          form.formState.isSubmitting ||
-          isRegisterPending
-        }
-        className="w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+        type='submit'
+        form='create-user-form'
+        disabled={form.formState.isSubmitting || isRegisterPending}
+        className='w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50'
       >
         {isRegisterPending ? 'Loading...' : 'Daftar'}
       </Button>
