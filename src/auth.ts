@@ -119,13 +119,13 @@ export const options: NextAuthOptions = {
       return session;
     },
   },
-  cookies: {
-    sessionToken: {
-      name: 'sessionToken',
-      options: {
-        maxAge: 60 * 60 * 24 * 7, // 1 week
-      },
-    },
-  },
+  // cookies: {
+  //   sessionToken: {
+  //     name: 'sessionToken',
+  //     options: {
+  //       maxAge: 60 * 60 * 24 * 7, // 1 week
+  //     },
+  //   },
+  // },
   secret: env.NEXTAUTH_SECRET,
 };
