@@ -24,25 +24,25 @@ export const Navbar = () => {
     <nav
       className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'}`}
     >
-      <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <div className='flex h-16 items-center justify-between'>
+      <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
+        <div className='flex items-center justify-between h-16'>
           <div className='flex items-center'>
-            <Image src={Icon} alt='GiziSnap Logo' className='h-10 w-auto' />
+            <Image src={Icon} alt='GiziSnap Logo' className='w-auto h-10' />
           </div>
 
           {/* Desktop Menu */}
           <DesktopNavbar />
 
           {/* Authentication Buttons */}
-          <div className='hidden items-center space-x-4 md:flex'>
+          <div className='items-center hidden space-x-4 md:flex'>
             <Link href='/auth/login'>
-              <Button className='bg-green-500 text-white hover:bg-green-600'>
+              <Button className='text-white bg-green-500 hover:bg-green-600'>
                 Masuk
               </Button>
             </Link>
             <Button
               variant='ghost'
-              className='border-green-500 text-green-500 hover:bg-green-50'
+              className='text-green-500 border-green-500 hover:bg-green-50'
             >
               <Link href='/auth/register'>Daftar</Link>
             </Button>

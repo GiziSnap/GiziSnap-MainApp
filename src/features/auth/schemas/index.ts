@@ -63,7 +63,7 @@ export const registerUserFormSchema = z.object({
 //   });
 
 export const loginUserFormSchema = z.object({
-  username: z.string().min(3, { message: 'Username minimal 3 karakter' }),
+  username: z.string().min(6, { message: 'Username minimal 6 karakter' }),
   password: z
     .string()
     .min(8, { message: 'Kata sandi minimal 8 karakter' })

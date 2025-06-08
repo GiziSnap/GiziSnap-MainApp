@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form';
 import { LoginUserFormInner } from './LoginUserFormInner';
 import { loginUserFormSchema } from '../../schemas';
 import { type LoginUserFormSchema } from '../../types';
-import { useLogin } from '../../api/useLogin';
+import { useLogin } from '../../hooks/useLogin';
 
 export const LoginUserForm = () => {
   const router = useRouter();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import CountUp from '@/components/ui/animations/count-up';
 
 type NutritionItem = {
   label: string;
@@ -54,7 +55,12 @@ const NutritionCard = ({ title, items }: NutritionCardProps) => {
                     <div
                       className={`bg-${safeColor}-100 text-${safeColor}-700 truncate rounded-full px-2 py-1 text-xs sm:text-sm`}
                     >
-                      {item.consumed}/{item.target} {item.unit}
+                      <CountUp
+                        from={0}
+                        to={item.consumed}
+                        duration={0.5}
+                        className="count-up-text"
+                      />/{item.target} {item.unit}
                     </div>
                   </div>
                   <Progress

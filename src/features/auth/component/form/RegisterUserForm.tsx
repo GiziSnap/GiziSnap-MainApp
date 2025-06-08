@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import type { RegisterUserFormSchema } from '../../types';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { useRegister } from '../../api/useRegister';
+import { useRegister } from '../../hooks/useRegister';
 
 export const RegisterUserForm = () => {
   const router = useRouter();

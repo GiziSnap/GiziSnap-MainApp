@@ -3,7 +3,7 @@ import { Globe } from 'lucide-react';
 import {
   Card,
   CardContent,
-  CardFooter,
+  CardFooter, 
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';

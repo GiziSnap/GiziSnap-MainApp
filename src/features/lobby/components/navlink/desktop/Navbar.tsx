@@ -34,10 +34,10 @@ export const Navbar = () => {
       </Button>
       <Button
         variant={'ghost'}
-        onClick={() => scrollToSection('about')}
+        onClick={() => scrollToSection('guide')}
         className='text-gray-70 border-green-500 px-3 py-2'
       >
-        Tentang
+        Panduan
       </Button>
       <Button
         variant={'ghost'}

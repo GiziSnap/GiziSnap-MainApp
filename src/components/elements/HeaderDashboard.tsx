@@ -49,14 +49,14 @@ export const HeaderDashboard = () => {
       <div className='flex items-center gap-5'>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
-            className='cursor-pointer outline-none focus:outline-none'
+            className='outline-none cursor-pointer focus:outline-none'
             aria-label='User Menu'
           >
             <div className='flex items-center gap-2'>
               <span className='hidden text-sm md:block'>
                 Hello, {dataUser.userName}
               </span>
-              <Avatar className='h-8 w-8'>
+              <Avatar className='w-8 h-8'>
                 <AvatarImage
                   src={dataUser.userAvatar}
                   alt={`@${dataUser.userName}`}
