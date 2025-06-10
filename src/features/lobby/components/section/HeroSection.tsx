@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CookingPot, ScanSearch, Stethoscope } from 'lucide-react';
+import { ArrowDownCircleIcon, ArrowRight, CookingPot, ScanSearch, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Ilustration from '@/../public/Ilustration.png';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import { SectionContainer } from '@/components/layouts';
 import AnimatedContent from '@/components/ui/animations/animated-content';
 import SplitText from '@/components/ui/animations/split-text';
 import Link from 'next/link';
+import InstallButton from '@/components/action/InstallPWAButton';
 
 export const HeroSection = () => {
   return (
@@ -39,16 +40,12 @@ export const HeroSection = () => {
             </p>
 
             <div className='flex space-x-4'>
-              <Button className='h-12 px-6 py-6 text-white bg-green-500 hover:bg-green-600'>
-                <Link href='/dashboard'>Mulai Sekarang</Link>
-                <ArrowRight className='ml-2' size={20} />
-              </Button>
-              <Button
-                variant='outline'
-                className='h-12 px-6 text-green-500 border-green-500 hover:bg-green-50'
-              >
-                Pelajari Lebih Lanjut
-              </Button>
+              <Link href='/dashboard' className=''>
+                <Button className='h-12 px-6 py-6 text-white bg-green-500 hover:bg-green-600 cursor-pointer'>
+                  Mulai Sekarang<ArrowRight className='ml-2' size={20} />
+                </Button>
+              </Link>
+              <InstallButton />
             </div>
 
             <div className='grid grid-cols-3 gap-4 mt-12'>
@@ -98,7 +95,7 @@ export const HeroSection = () => {
             </div>
           </AnimatedContent>
         </div>
-      </SectionContainer>
-    </div>
+      </SectionContainer >
+    </div >
   );
 };

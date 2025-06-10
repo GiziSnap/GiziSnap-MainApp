@@ -24,6 +24,9 @@ export default function RootLayout({
       lang='en'
       className={`${geist.variable}`}
     >
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body>
         <AppProvider>{children}</AppProvider>
       </body>

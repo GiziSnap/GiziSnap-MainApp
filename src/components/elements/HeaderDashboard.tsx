@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { SignOutAlert } from '../action/SignOut';
 import { useUserData } from '@/features/dashboard/utils/useUserData';
+import { PushNotificationManager } from '../notification/PushNotificationManager';
 
 export const HeaderDashboard = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,8 +26,9 @@ export const HeaderDashboard = () => {
     userAvatar: 'https://github.com/shadcn.png',
     userAvatarFallback: userInfo.username ?? 'User',
   };
+
   const handleScroll = () => {
-    setIsScrolled(window.scrollY > 0);
+    setIsScrolled(window.scrollY > 0); // Mengubah status isScrolled berdasarkan scroll posisi
   };
 
   useEffect(() => {
@@ -77,9 +79,7 @@ export const HeaderDashboard = () => {
             </DropdownMenuItem>
 
             <DropdownMenuItem>
-              <Link href='/billing' className='w-full'>
-                Billing
-              </Link>
+              <PushNotificationManager /> {/* Menambahkan komponen PushNotificationManager */}
             </DropdownMenuItem>
 
             <DropdownMenuItem>

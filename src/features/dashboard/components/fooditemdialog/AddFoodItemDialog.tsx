@@ -21,6 +21,9 @@ import DialogActions from './DialogAction';
 import { Button } from '@/components/ui/button';
 import { Loader2, Pencil } from 'lucide-react';
 import { useAddUserFood } from '../../hooks/useAddUserFood';
+import { sendNotification } from '@/components/action/action';
+
+import IconRounded from '@/../public/icon512_rounded.png'
 
 type AddFoodItemDialogProps = {
   isModalOpen: boolean;
@@ -114,7 +117,7 @@ export const AddFoodItemDialog = ({
     setCount(1);
   };
 
-  const handleAddFood = () => {
+  const handleAddFood = async () => {
     if (selectedFood) {
       const foodToAdd = {
         name: selectedFood.name,
@@ -124,7 +127,15 @@ export const AddFoodItemDialog = ({
         carbs: Number(nutrition?.data?.data['karbohidrat (g)'] ?? 0) * count,
         fat: Number(nutrition?.data?.data['lemak (g)'] ?? 0) * count,
       };
+
       addUserFood(foodToAdd);
+
+      try {
+        await sendNotification(`Berhasil menambahkan ${selectedFood.name}. Makanan ini telah ditambahkan!`, IconRounded.src, `${selectedFood.name} telah ditambahkan!`);
+        console.log("Push notification sent successfully!");
+      } catch (error) {
+        console.error("Failed to send notification:", error);
+      }
     } else {
       throw new Error('No food selected');
     }
