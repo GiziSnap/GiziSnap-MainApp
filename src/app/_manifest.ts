@@ -1,0 +1,30 @@
+import type { MetadataRoute } from 'next';
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    theme_color: '#e25c03',
+    background_color: '#34fe96',
+    icons: [
+      {
+        purpose: 'maskable',
+        sizes: '512x512',
+        src: 'icon512_maskable.png',
+        type: 'image/png',
+      },
+      {
+        purpose: 'any',
+        sizes: '512x512',
+        src: 'icon512_rounded.png',
+        type: 'image/png',
+      },
+    ],
+    orientation: 'any',
+    display: 'standalone',
+    dir: 'auto',
+    lang: 'id-ID',
+    name: 'GiziSnap',
+    short_name: 'GiziSnap',
+    start_url: '/',
+    scope: '/',
+  };
+}

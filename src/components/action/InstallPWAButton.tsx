@@ -1,0 +1,52 @@
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
+
+interface BeforeInstallPromptEvent extends Event {
+    prompt: () => Promise<void>;
+    userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
+const InstallButton = () => {
+    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+    const [isInstallable, setIsInstallable] = useState(false);
+
+    useEffect(() => {
+        const handleBeforeInstallPrompt = (e: Event) => {
+            e.preventDefault();
+            setDeferredPrompt(e as BeforeInstallPromptEvent);
+            setIsInstallable(true);
+        };
+
+        window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+        };
+    }, []);
+
+    const handleInstallClick = async () => {
+        if (deferredPrompt) {
+            await deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            setDeferredPrompt(null);
+            setIsInstallable(false);
+        }
+    };
+
+    return (
+        <>
+            {isInstallable && (
+                <Button
+                    onClick={handleInstallClick}
+                    variant='outline'
+                    className='h-12 px-6 text-green-500 border-green-500 hover:bg-green-50 hover:text-green-600'
+                >
+                    Install App <Download className='w-4 h-4 ml-2' />
+                </Button>
+            )}
+        </>
+    );
+};
+
+export default InstallButton;
