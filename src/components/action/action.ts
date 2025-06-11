@@ -37,8 +37,7 @@ export const sendNotification = async (message: NotificationMessage | string, bo
     
     if (registration) {
         await registration.showNotification(messageText, { 
-            body: messageText, 
-            icon: iconUrl
+            icon: iconUrl,
         });
     } else {
         throw new Error('Service Worker registration not found.');

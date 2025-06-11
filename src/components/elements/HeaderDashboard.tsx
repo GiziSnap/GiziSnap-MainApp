@@ -28,7 +28,7 @@ export const HeaderDashboard = () => {
   };
 
   const handleScroll = () => {
-    setIsScrolled(window.scrollY > 0); // Mengubah status isScrolled berdasarkan scroll posisi
+    setIsScrolled(window.scrollY > 0);
   };
 
   useEffect(() => {
@@ -76,10 +76,6 @@ export const HeaderDashboard = () => {
               <Link href='/profile' className='w-full'>
                 Profile
               </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem>
-              <PushNotificationManager /> {/* Menambahkan komponen PushNotificationManager */}
             </DropdownMenuItem>
 
             <DropdownMenuItem>
