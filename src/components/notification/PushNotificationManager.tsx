@@ -31,6 +31,7 @@ export function PushNotificationManager() {
 
             if (Notification.permission === 'granted') {
                 setSubscription(subscription);
+
             } else {
                 localStorage.removeItem('pushSubscriptionData');
                 toast.warning('Push notifications permission was not granted. Subscription data has been removed.');

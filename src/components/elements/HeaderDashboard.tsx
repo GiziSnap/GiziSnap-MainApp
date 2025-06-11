@@ -28,7 +28,7 @@ export const HeaderDashboard = () => {
   };
 
   const handleScroll = () => {
-    setIsScrolled(window.scrollY > 0);
+    setIsScrolled(window.scrollY > 0); // Mengubah status isScrolled berdasarkan scroll posisi
   };
 
   useEffect(() => {
