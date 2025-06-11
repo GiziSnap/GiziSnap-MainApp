@@ -79,10 +79,6 @@ export const HeaderDashboard = () => {
             </DropdownMenuItem>
 
             <DropdownMenuItem>
-              <PushNotificationManager /> {/* Menambahkan komponen PushNotificationManager */}
-            </DropdownMenuItem>
-
-            <DropdownMenuItem>
               <Link href='/team' className='w-full'>
                 Team
               </Link>
