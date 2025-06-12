@@ -9,7 +9,7 @@ import type {
 } from '../types';
 
 export const useUserData = () => {
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
   const {
     data: userDataSchema,
@@ -19,38 +19,57 @@ export const useUserData = () => {
     refetch,
   } = useGetUsersData();
 
-  const userInfo = useMemo<UserInformationSchema>(() => 
-    (userDataSchema as UserSchema)?.userinformation ?? {}, 
-    [userDataSchema]
-  );
-  const userFoodshistories = useMemo<UserFoodhistorySchema[]>(() => 
-    (userDataSchema as UserSchema)?.userfoodshistory ?? [], 
-    [userDataSchema]
-  );
-  const userNutrition = useMemo<UserNutritionSchema>(() => 
-    (userDataSchema as UserSchema)?.usernutrition ?? {
-      id: 0,
-      user_id: 0,
-      created_at: '',
-      updated_at: '',
-      calories: 0,
-      protein: 0,
-      carbs: 0,
-    }, 
-    [userDataSchema]
+  const userInfo = useMemo<UserInformationSchema>(
+    () => (userDataSchema as UserSchema)?.userinformation ?? {},
+    [userDataSchema],
   );
 
-  // Menyimpan data pengguna di localStorage jika tidak loading dan tidak ada error
+  const userFoodshistories = useMemo<UserFoodhistorySchema[]>(
+    () => (userDataSchema as UserSchema)?.userfoodshistory ?? [],
+    [userDataSchema],
+  );
+
+  const userNutrition = useMemo<UserNutritionSchema>(
+    () =>
+      (userDataSchema as UserSchema)?.usernutrition ?? {
+        id: 0,
+        user_id: 0,
+        created_at: '',
+        updated_at: '',
+        calories: 0,
+        protein: 0,
+        carbs: 0,
+      },
+    [userDataSchema],
+  );
+
+  const userAvatar = useMemo(
+    () => (userDataSchema as UserSchema)?.user_avatar ?? '',
+    [userDataSchema],
+  );
+
   useEffect(() => {
     if (!isLoading && !isError) {
       localStorage.setItem('userInfo', JSON.stringify(userInfo));
-      localStorage.setItem('userFoodshistories', JSON.stringify(userFoodshistories));
+      localStorage.setItem(
+        'userFoodshistories',
+        JSON.stringify(userFoodshistories),
+      );
       localStorage.setItem('userNutrition', JSON.stringify(userNutrition));
+      localStorage.setItem('userAvatar', JSON.stringify(userAvatar));
     }
-  }, [userInfo, userFoodshistories, userNutrition, isLoading, isError]);
+  }, [
+    userInfo,
+    userFoodshistories,
+    userNutrition,
+    userAvatar,
+    isLoading,
+    isError,
+  ]);
 
   return {
     userInfo,
+    userAvatar,
     isLoading,
     isError,
     error,

@@ -1,5 +1,11 @@
 import React from 'react';
-import { ArrowDownCircleIcon, ArrowRight, CookingPot, ScanSearch, Stethoscope } from 'lucide-react';
+import {
+  ArrowDownCircleIcon,
+  ArrowRight,
+  CookingPot,
+  ScanSearch,
+  Stethoscope,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Ilustration from '@/../public/Ilustration.png';
 import Image from 'next/image';
@@ -13,25 +19,23 @@ import InstallButton from '@/components/action/InstallPWAButton';
 export const HeroSection = () => {
   return (
     <div id='hero' className='mt-12 overflow-hidden'>
-      <SectionContainer className='px-4 pb-12 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-        <div className='grid items-center grid-cols-1 gap-12 md:grid-cols-2'>
+      <SectionContainer className='mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8'>
+        <div className='grid grid-cols-1 items-center gap-12 md:grid-cols-2'>
           <div>
             <Heading
               variant={'default'}
-              className='mb-6 text-4xl font-bold leading-tight'
+              className='mb-6 text-4xl leading-tight font-bold'
             >
               <SplitText
                 text='Sehatkan Hidupmu dengan GiziSnap'
                 duration={1}
-                ease="power3.out"
-                splitType="words"
+                ease='power3.out'
+                splitType='words'
                 threshold={0}
                 from={{ opacity: 0, y: 40 }}
                 to={{ opacity: 1, y: 0 }}
                 textAlign='left'
-              >
-
-              </SplitText>
+              ></SplitText>
             </Heading>
             <p className='mb-8 text-xl text-pretty'>
               Dapatkan informasi gizi yang akurat dan cepat untuk makanan sehat
@@ -41,16 +45,17 @@ export const HeroSection = () => {
 
             <div className='flex space-x-4'>
               <Link href='/dashboard' className=''>
-                <Button className='h-12 px-6 py-6 text-white bg-green-500 hover:bg-green-600 cursor-pointer'>
-                  Mulai Sekarang<ArrowRight className='ml-2' size={20} />
+                <Button className='h-12 cursor-pointer bg-green-500 px-6 py-6 text-white hover:bg-green-600'>
+                  Mulai Sekarang
+                  <ArrowRight className='ml-2' size={20} />
                 </Button>
               </Link>
               <InstallButton />
             </div>
 
-            <div className='grid grid-cols-3 gap-4 mt-12'>
+            <div className='mt-12 grid grid-cols-3 gap-4'>
               <div className='text-center'>
-                <div className='flex items-center justify-center w-16 h-16 mx-auto mb-3 rounded-full bg-green-50'>
+                <div className='mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-green-50'>
                   <ScanSearch className='text-green-600' size={32} />
                 </div>
                 <p className='text-sm text-gray-700 dark:text-white'>
@@ -58,7 +63,7 @@ export const HeroSection = () => {
                 </p>
               </div>
               <div className='text-center'>
-                <div className='flex items-center justify-center w-16 h-16 mx-auto mb-3 rounded-full bg-green-50'>
+                <div className='mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-green-50'>
                   <Stethoscope className='text-green-600' size={32} />
                 </div>
                 <p className='text-sm text-gray-700 dark:text-white'>
@@ -66,7 +71,7 @@ export const HeroSection = () => {
                 </p>
               </div>
               <div className='text-center'>
-                <div className='flex items-center justify-center w-16 h-16 mx-auto mb-3 rounded-full bg-green-50'>
+                <div className='mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-green-50'>
                   <CookingPot className='text-green-600' size={32} />
                 </div>
                 <p className='text-sm text-gray-700 dark:text-white'>
@@ -78,10 +83,10 @@ export const HeroSection = () => {
           {/* Image/Illustration */}
           <AnimatedContent
             distance={100}
-            direction="horizontal"
+            direction='horizontal'
             reverse={false}
             duration={1}
-            ease="power3.out"
+            ease='power3.out'
             initialOpacity={0}
             scale={1}
             threshold={0.1}
@@ -95,7 +100,7 @@ export const HeroSection = () => {
             </div>
           </AnimatedContent>
         </div>
-      </SectionContainer >
-    </div >
+      </SectionContainer>
+    </div>
   );
 };

@@ -18,9 +18,10 @@ import {
 import { useUserData } from '@/features/dashboard/utils/useUserData';
 import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 
 export function SidebarUser() {
-  const { userInfo } = useUserData();
+  const { userInfo, userAvatar } = useUserData();
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
@@ -35,43 +36,43 @@ export function SidebarUser() {
               size='lg'
               className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
             >
-              <Avatar className='w-8 h-8 rounded-lg'>
+              <Avatar className='h-8 w-8 rounded-lg'>
                 <AvatarImage
-                  src={userInfo.avatar ?? '/default-avatar.jpg'}
+                  src={userAvatar ?? '/default-avatar.jpg'}
                   alt={userInfo.username ?? 'User'}
                 />
                 <AvatarFallback className='rounded-lg'>
                   {userInfo.username?.charAt(0) ?? 'U'}
                 </AvatarFallback>
               </Avatar>
-              <div className='grid flex-1 text-sm leading-tight text-left'>
-                <span className='font-semibold truncate'>
+              <div className='grid flex-1 text-left text-sm leading-tight'>
+                <span className='truncate font-semibold'>
                   {userInfo.username ?? 'Guest'}
                 </span>
-                <span className='text-xs truncate'>
+                <span className='truncate text-xs'>
                   {userInfo.email_address ?? 'N/A'}
                 </span>
               </div>
               <ChevronsUpDown className='ml-auto size-4' />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className='rounded-lg min-w-56'>
+          <DropdownMenuContent className='min-w-56 rounded-lg'>
             <DropdownMenuLabel className='p-0 font-normal'>
               <div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
-                <Avatar className='w-8 h-8 rounded-lg'>
+                <Avatar className='h-8 w-8 rounded-lg'>
                   <AvatarImage
-                    src={userInfo.avatar ?? '/default-avatar.jpg'}
+                    src={userAvatar ?? '/default-avatar.jpg'}
                     alt={userInfo.username ?? 'User'}
                   />
                   <AvatarFallback className='rounded-lg'>
                     {userInfo.username?.charAt(0) ?? 'U'}
                   </AvatarFallback>
                 </Avatar>
-                <div className='grid flex-1 text-sm leading-tight text-left'>
-                  <span className='font-semibold truncate'>
+                <div className='grid flex-1 text-left text-sm leading-tight'>
+                  <span className='truncate font-semibold'>
                     {userInfo.username ?? 'Guest'}
                   </span>
-                  <span className='text-xs truncate'>
+                  <span className='truncate text-xs'>
                     {userInfo.email_address ?? 'N/A'}
                   </span>
                 </div>
@@ -79,7 +80,9 @@ export function SidebarUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>Account</DropdownMenuItem>
+              <Link href={`/dashboard/${userInfo.id}/profile`}>
+                <DropdownMenuItem>Account</DropdownMenuItem>
+              </Link>
               <DropdownMenuItem>Billing</DropdownMenuItem>
               <DropdownMenuItem>Notifications</DropdownMenuItem>
             </DropdownMenuGroup>

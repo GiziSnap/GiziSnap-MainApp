@@ -1,5 +1,5 @@
-import type { NextRequest } from "next/server";
-import webpush from "web-push";
+import type { NextRequest } from 'next/server';
+import webpush from 'web-push';
 
 let subscription: PushSubscription;
 
@@ -16,18 +16,18 @@ export async function POST(request: NextRequest) {
 }
 
 async function setSubscription(request: NextRequest) {
-  const body = await request.json() as { subscription: PushSubscription };
+  const body = (await request.json()) as { subscription: PushSubscription };
   subscription = body.subscription;
   return new Response(JSON.stringify({ message: 'Subscription set.' }), {});
 }
 
 async function sendPush(request: NextRequest) {
-  const body = await request.json() as { subscription: PushSubscription }
+  const body = (await request.json()) as { subscription: PushSubscription };
   const pushPayload = body;
   await webpush.sendNotification(subscription, pushPayload);
   return new Response(JSON.stringify({ message: 'Push sent.' }), {});
 }
 
 function notFoundApi() {
-    throw new Error("Function not implemented.");
+  throw new Error('Function not implemented.');
 }

@@ -1,20 +1,29 @@
-import { getToken } from 'next-auth/jwt';  
-import { NextResponse } from 'next/server';  
-import type { NextRequest } from 'next/server';  
+import { getToken } from 'next-auth/jwt';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { env } from './env';
 
-export const middleware = async (req: NextRequest) => {  
-  const token: Record<string, unknown> | null = await getToken({ req });  
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ req, secret: env.NEXTAUTH_SECRET });
 
-  if (token) {  
-    if (req.nextUrl.pathname === '/auth/login') {  
-      return NextResponse.redirect(new URL('/dashboard', req.url));  
-    }  
-    return NextResponse.next();  
-  } else {  
-    if (req.nextUrl.pathname.startsWith('/dashboard')) {  
-      return NextResponse.redirect(new URL('/auth/login', req.url));  
-    }  
-  }  
+  const { pathname } = req.nextUrl;
+  if (token) {
+    if (pathname.startsWith('/auth/login')) {
+      return NextResponse.redirect(new URL('/dashboard', req.url));
+    }
+  }
 
-  return NextResponse.next();  
+  if (!token) {
+    if (pathname.startsWith('/dashboard') || pathname.startsWith('/profile')) {
+      const loginUrl = new URL('/auth/login', req.url);
+      loginUrl.searchParams.set('from', pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/dashboard/:path*', '/profile/:path*', '/auth/login'],
 };

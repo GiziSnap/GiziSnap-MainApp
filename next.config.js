@@ -3,7 +3,10 @@
  * for Docker builds.
  */
 import { env } from './src/env.js';
-import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from 'next/constants.js';
+import {
+  PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_BUILD,
+} from 'next/constants.js';
 import withSerwist from '@serwist/next';
 
 /** @type {(phase: string, defaultConfig: import("next").NextConfig) => Promise<import("next").NextConfig>} */
@@ -11,7 +14,12 @@ const configBuilder = async (phase) => {
   /** @type {import("next").NextConfig} */
   const nextConfig = {
     images: {
-      domains: ['github.com', 'dummyimage.com'],
+      domains: [
+        'github.com',
+        'dummyimage.com',
+        'rails-service-gizisnap.onrender.com',
+        'utfs.io',
+      ],
     },
     async headers() {
       return [
@@ -34,7 +42,7 @@ const configBuilder = async (phase) => {
               key: 'Access-Control-Allow-Credentials',
               value: 'true',
             },
-          ]
+          ],
         },
         {
           source: '/(.*)',
@@ -69,7 +77,7 @@ const configBuilder = async (phase) => {
               value: "default-src 'self'; script-src 'self'",
             },
           ],
-        }
+        },
       ];
     },
     async rewrites() {
@@ -82,8 +90,8 @@ const configBuilder = async (phase) => {
     },
   };
 
-  // Menambahkan konfigurasi Serwist jika dalam mode bukan pengembangan  
-  if (phase === PHASE_PRODUCTION_BUILD || (phase === PHASE_DEVELOPMENT_SERVER && process.env.DISABLE_SERWIST !== "true")) {
+  // Hanya gunakan Serwist pada build produksi, bukan pada mode pengembangan
+  if (phase === PHASE_PRODUCTION_BUILD) {
     return withSerwist({
       swSrc: 'public/sw.ts',
       swDest: 'public/sw.js',

@@ -25,44 +25,56 @@ export const FoodItemRow = ({ food }: Props) => {
             Porsi: <span className='font-medium'>{food.quantity}</span>
           </p>
           <p>
-            Kalori: <span className='font-medium'>
+            Kalori:{' '}
+            <span className='font-medium'>
               <CountUp
                 from={0}
                 to={food.calories}
-                separator=","
+                separator=','
                 duration={1}
-                className="count-up-text"
-              /> kcal</span>
+                className='count-up-text'
+              />{' '}
+              kcal
+            </span>
           </p>
           <p>
-            Protein: <span className='font-medium'>
+            Protein:{' '}
+            <span className='font-medium'>
               <CountUp
                 from={0}
                 to={food.protein}
-                separator=","
+                separator=','
                 duration={1}
-                className="count-up-text"
-              /> g</span>
+                className='count-up-text'
+              />{' '}
+              g
+            </span>
           </p>
           <p>
-            Karbo: <span className='font-medium'>
+            Karbo:{' '}
+            <span className='font-medium'>
               <CountUp
                 from={0}
                 to={food.carbs}
-                separator=","
+                separator=','
                 duration={1}
-                className="count-up-text"
-              /> g</span>
+                className='count-up-text'
+              />{' '}
+              g
+            </span>
           </p>
           <p>
-            Lemak: <span className='font-medium'>
+            Lemak:{' '}
+            <span className='font-medium'>
               <CountUp
                 from={0}
                 to={food.fat}
-                separator=","
+                separator=','
                 duration={1}
-                className="count-up-text"
-              /> g</span>
+                className='count-up-text'
+              />{' '}
+              g
+            </span>
           </p>
 
           <div className='flex items-center'>

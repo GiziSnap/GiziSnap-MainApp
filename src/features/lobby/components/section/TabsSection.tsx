@@ -61,8 +61,8 @@ export function TabsSection() {
                   <div>
                     <h3 className='mb-2 font-semibold'>Persiapan</h3>
                     <p className='text-muted-foreground text-base'>
-                      Buka website GiziSnap melalui browser smartphone Anda. Tidak
-                      perlu download aplikasi khusus – kami hadir sebagai
+                      Buka website GiziSnap melalui browser smartphone Anda.
+                      Tidak perlu download aplikasi khusus – kami hadir sebagai
                       Progressive Web App yang dapat diakses dari mana saja.
                     </p>
                   </div>
@@ -70,8 +70,8 @@ export function TabsSection() {
                     <h3 className='mb-2 font-semibold'>Registrasi</h3>
                     <p className='text-muted-foreground text-base'>
                       Buat akun dengan cepat menggunakan email. Lengkapi profil
-                      kesehatan dasar seperti usia, berat, dan tinggi badan untuk
-                      mendapatkan rekomendasi nutrisi personal.
+                      kesehatan dasar seperti usia, berat, dan tinggi badan
+                      untuk mendapatkan rekomendasi nutrisi personal.
                     </p>
                   </div>
                 </div>
@@ -95,8 +95,8 @@ export function TabsSection() {
                     <h3 className='mb-2 font-semibold'>Pemindaian Makanan</h3>
                     <p className='text-muted-foreground text-base'>
                       Gunakan kamera untuk memindai makanan atau input manual.
-                      Teknologi AI kami secara instan mengenali jenis makanan dan
-                      menganalisis komposisi nutrisinya.
+                      Teknologi AI kami secara instan mengenali jenis makanan
+                      dan menganalisis komposisi nutrisinya.
                     </p>
                   </div>
                   <div>
@@ -127,17 +127,17 @@ export function TabsSection() {
                   <div>
                     <h3 className='mb-2 font-semibold'>Tips Penggunaan</h3>
                     <p className='text-muted-foreground text-base'>
-                      Gunakan pencahayaan baik saat memindai. Pindai sebelum makan
-                      untuk analisis akurat. Perbarui profil kesehatan secara
-                      berkala.
+                      Gunakan pencahayaan baik saat memindai. Pindai sebelum
+                      makan untuk analisis akurat. Perbarui profil kesehatan
+                      secara berkala.
                     </p>
                   </div>
                   <div>
                     <h3 className='mb-2 font-semibold'>Keamanan Data</h3>
                     <p className='text-muted-foreground text-base'>
                       Data Anda diamankan dengan enkripsi tingkat lanjut. Kami
-                      menjamin privasi dan kontrol penuh atas informasi kesehatan
-                      pribadi Anda.
+                      menjamin privasi dan kontrol penuh atas informasi
+                      kesehatan pribadi Anda.
                     </p>
                   </div>
                 </div>

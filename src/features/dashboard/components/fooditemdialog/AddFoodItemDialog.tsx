@@ -23,7 +23,7 @@ import { Loader2, Pencil } from 'lucide-react';
 import { useAddUserFood } from '../../hooks/useAddUserFood';
 import { sendNotification } from '@/components/action/action';
 
-import IconRounded from '@/../public/icon512_rounded.png'
+import IconRounded from '@/../public/icon512_rounded.png';
 
 type AddFoodItemDialogProps = {
   isModalOpen: boolean;
@@ -131,10 +131,14 @@ export const AddFoodItemDialog = ({
       addUserFood(foodToAdd);
 
       try {
-        await sendNotification(`Berhasil menambahkan ${selectedFood.name}. Makanan ini telah ditambahkan!`, IconRounded.src, `${selectedFood.name} telah ditambahkan!`);
-        console.log("Push notification sent successfully!");
+        await sendNotification(
+          `Berhasil menambahkan ${selectedFood.name}. Makanan ini telah ditambahkan!`,
+          IconRounded.src,
+          `${selectedFood.name} telah ditambahkan!`,
+        );
+        console.log('Push notification sent successfully!');
       } catch (error) {
-        console.error("Failed to send notification:", error);
+        console.error('Failed to send notification:', error);
       }
     } else {
       throw new Error('No food selected');
@@ -147,13 +151,13 @@ export const AddFoodItemDialog = ({
     <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
       <DialogTrigger asChild>
         <Button
-          className='flex items-center justify-center px-4 py-2 mt-4 text-white transition duration-200 bg-orange-500 rounded-md hover:bg-orange-600'
+          className='mt-4 flex items-center justify-center rounded-md bg-orange-500 px-4 py-2 text-white transition duration-200 hover:bg-orange-600'
           onClick={() => setIsModalOpen(true)}
           disabled={isLoadingFood}
         >
           {isLoadingFood ? (
             <span className='flex items-center gap-2'>
-              Loading <Loader2 className='w-4 h-4 animate-spin' />
+              Loading <Loader2 className='h-4 w-4 animate-spin' />
             </span>
           ) : (
             <span className='flex items-center gap-2 text-sm'>

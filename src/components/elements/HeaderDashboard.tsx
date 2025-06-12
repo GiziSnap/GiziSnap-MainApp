@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Heading } from '../ui/heading';
@@ -18,17 +19,17 @@ import { PushNotificationManager } from '../notification/PushNotificationManager
 export const HeaderDashboard = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const { userInfo } = useUserData();
+  const { userInfo, userAvatar } = useUserData();
 
   const dataUser = {
     brandName: 'GiziSnap',
     userName: userInfo.username ?? 'User ',
-    userAvatar: 'https://github.com/shadcn.png',
-    userAvatarFallback: userInfo.username ?? 'User',
+    userAvatar: userAvatar ?? '',
+    userAvatarFallback: userInfo.username?.charAt(0) ?? 'U',
   };
 
   const handleScroll = () => {
-    setIsScrolled(window.scrollY > 0); // Mengubah status isScrolled berdasarkan scroll posisi
+    setIsScrolled(window.scrollY > 0);
   };
 
   useEffect(() => {
@@ -51,17 +52,17 @@ export const HeaderDashboard = () => {
       <div className='flex items-center gap-5'>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
-            className='outline-none cursor-pointer focus:outline-none'
+            className='cursor-pointer outline-none focus:outline-none'
             aria-label='User Menu'
           >
             <div className='flex items-center gap-2'>
               <span className='hidden text-sm md:block'>
                 Hello, {dataUser.userName}
               </span>
-              <Avatar className='w-8 h-8'>
+              <Avatar className='h-8 w-8'>
                 <AvatarImage
                   src={dataUser.userAvatar}
-                  alt={`@${dataUser.userName}`}
+                  alt={dataUser.userName}
                 />
                 <AvatarFallback>{dataUser.userAvatarFallback}</AvatarFallback>
               </Avatar>

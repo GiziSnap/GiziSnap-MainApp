@@ -69,3 +69,28 @@ export const loginUserFormSchema = z.object({
     .min(8, { message: 'Kata sandi minimal 8 karakter' })
     .max(50, { message: 'Kata sandi maksimal 50 karakter' }),
 });
+
+export const updateUserFormSchema = z.object({
+  id: z.string().optional(),
+  avatar: z.string().optional().nullable(),
+  // avatar: z.instanceof(File).optional().nullable(),
+  username: z
+    .string()
+    .min(6, { message: 'Username minimal 6 karakter' })
+    .max(20, { message: 'Username maksimal 20 karakter' }),
+  email_address: z
+    .string({ message: 'Email tidak valid' })
+    .email({ message: 'Email tidak valid' })
+    .regex(emailRegex, {
+      message:
+        'Hanya email dengan domain Gmail, Yahoo, Hotmail, Outlook, atau Email yang valid.',
+    }),
+  password: z
+    .string()
+    .min(8, { message: 'Kata sandi minimal 8 karakter' })
+    .max(50, { message: 'Kata sandi maksimal 50 karakter' })
+    .optional()
+    .refine((val) => val === undefined || val.length >= 8, {
+      message: 'Kata sandi minimal 8 karakter',
+    }),
+});

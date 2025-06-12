@@ -14,9 +14,9 @@ export const RegisterPage = () => {
   const router = useRouter();
   return (
     <PageContainer title='Daftar - GiziSnap'>
-      <div className='relative flex w-full min-h-screen'>
+      <div className='relative flex min-h-screen w-full'>
         <div
-          className='absolute z-50 flex items-center justify-center w-10 h-10 transition-all rounded-full cursor-pointer top-4 left-4 bg-white/65 hover:bg-white/80'
+          className='absolute top-4 left-4 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/65 transition-all hover:bg-white/80'
           onClick={() => router.push('/')}
         >
           <ArrowLeft size={19} />
@@ -26,21 +26,21 @@ export const RegisterPage = () => {
             src={bg_img}
             alt='GiziSnap Background'
             quality={100}
-            className='object-cover w-full h-full'
+            className='h-full w-full object-cover'
           />
         </div>
-        <div className='relative z-10 flex items-center justify-center w-full px-4'>
+        <div className='relative z-10 flex w-full items-center justify-center px-4'>
           <AnimatedContent
             distance={100}
-            direction="horizontal"
+            direction='horizontal'
             reverse={true}
             duration={1}
-            ease="power3.out"
+            ease='power3.out'
             initialOpacity={0}
             scale={1}
             threshold={0.1}
           >
-            <Card className='w-full md:max-w-md lg:min-w-[450px] border-0 shadow-2xl bg-white/80 backdrop-blur-sm'>
+            <Card className='w-full border-0 bg-white/80 shadow-2xl backdrop-blur-sm md:max-w-md lg:min-w-[450px]'>
               <CardHeader className='pb-4 text-center'>
                 <h2 className='text-2xl font-bold text-green-800'>
                   Daftar di GiziSnap

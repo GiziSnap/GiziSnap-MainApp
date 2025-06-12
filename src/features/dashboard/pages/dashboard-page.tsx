@@ -26,7 +26,6 @@ import WeeklyNutritionAnalysisCard from '../components/WeeklyNutritionAnalysisCa
 import FoodOriginAnalysis from '../components/FoodOriginAnalysis';
 import { Calendar } from '@/components/ui/calendar';
 import { useUserData } from '../utils/useUserData';
-import { toast } from 'sonner';
 import { FoodLogSection } from '../components/section/FoodLogSection';
 import { isAfter, isSameDay, format } from 'date-fns';
 
@@ -36,7 +35,7 @@ export const DashboardPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
 
   const { status } = useSession();
-  const { userInfo, refetch, userFoodshistories } = useUserData();
+  const { userInfo, refetch, userFoodshistories, userAvatar } = useUserData();
 
   const locations = [
     'Jakarta',
@@ -55,8 +54,8 @@ export const DashboardPage = () => {
   const dataUser = useMemo(
     () => ({
       userName: userInfo?.username ?? 'User',
-      userAvatar: 'https://github.com/shadcn.png',
-      userAvatarFallback: userInfo?.username ?? 'U',
+      userAvatar: userAvatar ?? '',
+      userAvatarFallback: userInfo?.username?.charAt(0) ?? 'U',
     }),
     [userInfo],
   );
@@ -164,18 +163,17 @@ export const DashboardPage = () => {
     ];
   }, [userFoodshistories, selectedDate, userInfo]);
 
-  // Menampilkan toast selamat datang saat user login
-  useEffect(() => {
-    if (status === 'loading') return;
-    if (status === 'authenticated' && userInfo?.username) {
-      toast.success(`Selamat datang ${userInfo.username}`, {
-        description: 'Selamat datang di dashboard',
-        richColors: true,
-        duration: 3000,
-        icon: '🎉',
-      });
-    }
-  }, [status, userInfo]);
+  // useEffect(() => {
+  //   if (status === 'loading') return;
+  //   if (status === 'authenticated' && userInfo?.username) {
+  //     toast.success(`Selamat datang ${userInfo.username}`, {
+  //       description: 'Selamat datang di dashboard',
+  //       richColors: true,
+  //       duration: 3000,
+  //       icon: '🎉',
+  //     });
+  //   }
+  // }, [status, userInfo]);
 
   // Mengecek apakah tanggal yang dipilih adalah hari ini
   const isToday = useMemo(() => {
@@ -207,6 +205,7 @@ export const DashboardPage = () => {
         <main className='mx-auto w-full px-4 py-6 sm:max-w-[640px] md:max-w-[768px] lg:max-w-screen-lg xl:max-w-[1280px] 2xl:max-w-screen-xl'>
           {/* Profile and Location Section */}
           <UserCard
+            // userAvatar={dataUser.userAvatar}
             userAvatar={dataUser.userAvatar}
             userAvatarFallback={dataUser.userAvatarFallback}
             userName={dataUser.userName}
@@ -253,7 +252,6 @@ export const DashboardPage = () => {
                       date && setSelectedDate(date)
                     }
                     disabled={isDateDisabled}
-                    initialFocus
                   />
                 </PopoverContent>
               </Popover>

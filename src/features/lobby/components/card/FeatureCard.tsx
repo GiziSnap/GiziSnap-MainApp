@@ -10,17 +10,17 @@ type FeatureCardProps = {
 const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => (
   <AnimatedContent
     distance={100}
-    direction="horizontal"
+    direction='horizontal'
     reverse={false}
     duration={1}
-    ease="power3.out"
+    ease='power3.out'
     initialOpacity={0}
     scale={1}
     threshold={0.1}
   >
     <Card className='transition-all hover:shadow-lg'>
       <CardHeader className='pb-2'>
-        <div className='flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-green-50'>
+        <div className='mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-50'>
           <Icon className='text-green-600' size={32} />
         </div>
         <CardTitle className='text-xl font-semibold'>{title}</CardTitle>

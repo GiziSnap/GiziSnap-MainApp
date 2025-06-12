@@ -9,13 +9,14 @@ import {
   SelectItem,
 } from '@/components/ui/select';
 import Image from 'next/image';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type UserCardProps = {
   userName: string;
   selectedLocation: string;
   setSelectedLocation: (location: string) => void;
   locations: string[];
-  userAvatar: string;
+  userAvatar: string | File;
   userAvatarFallback: string;
 };
 
@@ -33,13 +34,26 @@ export const UserCard: React.FC<UserCardProps> = ({
         <div className='mb-4 flex items-center md:mb-0'>
           <div className='mr-4 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full'>
             {userAvatar && (
-              <Image
-                src={userAvatar}
-                alt={userAvatarFallback}
-                width={64}
-                height={64}
-                className='rounded-full object-cover'
-              />
+              <Avatar className='h-16 w-16 rounded-full'>
+                <AvatarImage
+                  src={
+                    typeof userAvatar === 'string'
+                      ? userAvatar
+                      : URL.createObjectURL(userAvatar)
+                  }
+                  alt={userAvatarFallback}
+                />
+                <AvatarFallback className='rounded-full object-cover'>
+                  {userAvatarFallback}
+                </AvatarFallback>
+              </Avatar>
+              // <Image
+              //   src={typeof userAvatar === 'string' ? userAvatar : URL.createObjectURL(userAvatar)}
+              //   alt={userAvatarFallback}
+              //   width={64}
+              //   height={64}
+              //   className='rounded-full object-cover'
+              // />
             )}
           </div>
           <div className='flex flex-col'>

@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   Scale,
   ScanSearchIcon,
+  UtensilsCrossed,
 } from 'lucide-react';
 import type { MenuItem, UserProfile, AppInfo } from './types';
 
@@ -29,6 +30,11 @@ export const sidebarMenu: MenuItem[] = [
     name: 'Pemindai Makanan',
     url: '/dashboard/pemindai-makanan',
     icon: ScanSearchIcon,
+  },
+  {
+    name: 'Data Makanan',
+    url: '/dashboard/food-data',
+    icon: UtensilsCrossed,
   },
   {
     name: 'Gizi',

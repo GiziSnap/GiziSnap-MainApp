@@ -5,14 +5,18 @@ export type UserSchema = {
   userinformation?: UserInformationSchema;
   userfoodshistory?: UserFoodhistorySchema[];
   usernutrition?: UserNutritionSchema;
+  user_avatar?: File | null;
 };
 
 export type UserInformationSchema = {
+  id?: string;
   calorieGoal?: number;
   proteinGoal?: number;
   carbsGoal?: number;
+  user_avatar?: File;
   username?: string;
   email_address?: string;
+  password?: string;
   created_at?: string;
   updated_at?: string;
   avatar?: string;

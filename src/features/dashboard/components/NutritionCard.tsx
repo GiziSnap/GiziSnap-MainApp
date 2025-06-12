@@ -59,8 +59,9 @@ const NutritionCard = ({ title, items }: NutritionCardProps) => {
                         from={0}
                         to={item.consumed}
                         duration={0.5}
-                        className="count-up-text"
-                      />/{item.target} {item.unit}
+                        className='count-up-text'
+                      />
+                      /{item.target} {item.unit}
                     </div>
                   </div>
                   <Progress
