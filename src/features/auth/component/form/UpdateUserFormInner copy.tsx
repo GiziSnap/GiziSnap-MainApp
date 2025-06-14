@@ -51,8 +51,8 @@ export const UpdateUserFormInner = ({
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
-      form.setValue('avatar', URL.createObjectURL(file));
-      // form.setValue('avatar', file);
+      // form.setValue('avatar', URL.createObjectURL(file));
+      form.setValue('avatar', file);
     } else {
       setPreviewImage(null);
       form.setValue('avatar', undefined);
