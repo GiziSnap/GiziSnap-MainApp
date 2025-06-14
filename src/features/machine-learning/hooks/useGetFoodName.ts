@@ -4,11 +4,11 @@ import mlAxios from '@/lib/axios/mlAxios';
 
 export const useGetFoodName = () => {
   return useQuery<ApiResponse<string[]>, Error>({
-    queryKey: ['foodNames'], // Kunci query untuk cache
+    queryKey: ['foodNames'],
     queryFn: async () => {
       try {
         const response = await mlAxios.get<ApiResponse<string[]>>(
-          '/sheet-data/scrap_food_name_list',
+          '/api/sheet-data/scrap_food_name_list',
         );
         return response.data;
       } catch (error) {
@@ -16,6 +16,6 @@ export const useGetFoodName = () => {
         throw new Error('Unable to fetch food names. Please try again later.');
       }
     },
-    staleTime: 60000, // Waktu dalam milidetik di mana data dianggap "fresh"
+    staleTime: 60000,
   });
 };

@@ -11,7 +11,7 @@ export const useGetFoodNutrition = ({ foodName }: { foodName: string }) => {
         throw new Error('foodName is required');
       }
       const response = await mlAxios.get<ApiResponse<FoodData>>(
-        `/food-nutrition/${foodName}`,
+        `/api/food-nutrition/${foodName}`,
       );
       return response.data;
     },

@@ -72,8 +72,8 @@ export const loginUserFormSchema = z.object({
 
 export const updateUserFormSchema = z.object({
   id: z.string().optional(),
-  avatar: z.string().optional().nullable(),
-  // avatar: z.instanceof(File).optional().nullable(),
+  // avatar: z.string().optional().nullable(),
+  avatar: z.instanceof(File).optional().nullable(),
   username: z
     .string()
     .min(6, { message: 'Username minimal 6 karakter' })

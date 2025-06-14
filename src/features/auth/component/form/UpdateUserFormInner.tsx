@@ -51,8 +51,8 @@ export const UpdateUserFormInner = ({
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
-      form.setValue('avatar', URL.createObjectURL(file));
-      // form.setValue('avatar', file);
+      // form.setValue('avatar', URL.createObjectURL(file));
+      form.setValue('avatar', file);
     } else {
       setPreviewImage(null);
       form.setValue('avatar', undefined);
@@ -138,7 +138,7 @@ export const UpdateUserFormInner = ({
       />
 
       {/* Bagian Unggah Foto Profil */}
-      <FormItem className='mt-4'>
+      {/* <FormItem className='mt-4'>
         <FormLabel className='text-lg font-semibold text-gray-800'>
           Foto Profil
         </FormLabel>
@@ -183,9 +183,9 @@ export const UpdateUserFormInner = ({
           </div>
         </div>
         <FormMessage className='text-sm text-red-600' />
-      </FormItem>
+      </FormItem> */}
       {/* Input untuk Upload Gambar Profil */}
-      {/* <FormField
+      <FormField
         control={form.control}
         name='avatar'
         render={({ field }) => (
@@ -231,7 +231,7 @@ export const UpdateUserFormInner = ({
             <FormMessage className='text-sm text-red-600' />
           </FormItem>
         )}
-      /> */}
+      />
     </form>
   );
 };

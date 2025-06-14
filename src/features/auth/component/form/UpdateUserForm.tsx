@@ -26,11 +26,11 @@ export const UpdateUserForm = ({ profileId }: UpdateUserFormProps) => {
       email_address: data.email_address ?? '',
       username: data.username ?? '',
       password: '',
-      avatar:
-        userAvatar instanceof File
-          ? URL.createObjectURL(userAvatar)
-          : (userAvatar ?? null),
-      // avatar: typeof userAvatar === 'string' ? null : userAvatar,
+      // avatar:
+      //   userAvatar instanceof File
+      //     ? URL.createObjectURL(userAvatar)
+      //     : (userAvatar ?? null),
+      avatar: typeof userAvatar === 'string' ? null : userAvatar,
     },
   });
 

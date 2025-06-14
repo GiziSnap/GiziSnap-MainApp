@@ -60,7 +60,6 @@ export const DashboardPage = () => {
     [userInfo],
   );
 
-  // Membuat daftar tanggal dengan riwayat dari userFoodshistories
   const historyDates = useMemo(() => {
     if (!userFoodshistories) return [];
     const dates = userFoodshistories
@@ -76,7 +75,6 @@ export const DashboardPage = () => {
     return dates;
   }, [userFoodshistories]);
 
-  // Menghitung total nutrisi berdasarkan tanggal yang dipilih
   const nutritionData = useMemo(() => {
     if (!userFoodshistories || !selectedDate) {
       return [
@@ -181,10 +179,9 @@ export const DashboardPage = () => {
     return selectedDate && selectedDate.toDateString() === today.toDateString();
   }, [selectedDate]);
 
-  // Fungsi untuk menonaktifkan tanggal tanpa riwayat atau di masa depan, kecuali hari ini
   const isDateDisabled = useMemo(() => {
     const today = new Date();
-    today.setHours(23, 59, 59, 999); // Akhir hari ini
+    today.setHours(23, 59, 59, 999);
     const historySet = new Set(historyDates);
 
     return (date: Date) => {
@@ -194,7 +191,6 @@ export const DashboardPage = () => {
     };
   }, [historyDates]);
 
-  // Tampilan loading saat sesi masih dimuat
   if (status === 'loading') {
     return <MainLoading />;
   }
@@ -205,7 +201,6 @@ export const DashboardPage = () => {
         <main className='mx-auto w-full px-4 py-6 sm:max-w-[640px] md:max-w-[768px] lg:max-w-screen-lg xl:max-w-[1280px] 2xl:max-w-screen-xl'>
           {/* Profile and Location Section */}
           <UserCard
-            // userAvatar={dataUser.userAvatar}
             userAvatar={dataUser.userAvatar}
             userAvatarFallback={dataUser.userAvatarFallback}
             userName={dataUser.userName}

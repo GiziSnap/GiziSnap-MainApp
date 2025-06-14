@@ -23,14 +23,35 @@ export type UserInformationSchema = {
 };
 
 export type UserFoodhistorySchema = {
+  // --- Kunci & Identitas Utama ---
   id?: number;
+  user_id?: number; // Ditambahkan, sepertinya ini adalah foreign key ke user
   name: string;
   quantity: number;
+  sumber?: string; // "source"
+
+  // --- Makronutrien Utama ---
   calories: number;
   protein: number;
   carbs: number;
   fat: number;
-  sumber?: string;
+
+  // --- Nutrisi Tambahan (baru ditambahkan) ---
+  energy?: number | null;
+  fiber?: number | null;
+  sugar?: number | null;
+
+  // --- Rincian Lemak (baru ditambahkan) ---
+  saturatedfat?: number | null;
+  monounsaturatedfat?: number | null;
+  polyunsaturatedfat?: number | null;
+
+  // --- Mineral & Lainnya (baru ditambahkan) ---
+  cholesterol?: number | null;
+  sodium?: number | null;
+  potassium?: number | null;
+
+  // --- Timestamps ---
   created_at?: string;
   updated_at?: string;
 };

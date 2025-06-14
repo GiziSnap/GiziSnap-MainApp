@@ -28,7 +28,7 @@ export const sidebarMenu: MenuItem[] = [
   },
   {
     name: 'Pemindai Makanan',
-    url: '/dashboard/pemindai-makanan',
+    url: '/dashboard/scan-food',
     icon: ScanSearchIcon,
   },
   {
@@ -36,23 +36,23 @@ export const sidebarMenu: MenuItem[] = [
     url: '/dashboard/food-data',
     icon: UtensilsCrossed,
   },
-  {
-    name: 'Gizi',
-    url: '#',
-    icon: Scale,
-    items: [
-      {
-        title: 'Status Gizi',
-        url: '/dashboard/status-gizi',
-      },
-      {
-        title: 'Kalkulator Gizi',
-        url: '/dashboard/kalkulator-gizi',
-      },
-      {
-        title: 'Riwayat Gizi',
-        url: '/dashboard/riwayat-gizi',
-      },
-    ],
-  },
+  // {
+  //   name: 'Gizi',
+  //   url: '#',
+  //   icon: Scale,
+  //   items: [
+  //     {
+  //       title: 'Status Gizi',
+  //       url: '/dashboard/status-gizi',
+  //     },
+  //     {
+  //       title: 'Kalkulator Gizi',
+  //       url: '/dashboard/kalkulator-gizi',
+  //     },
+  //     {
+  //       title: 'Riwayat Gizi',
+  //       url: '/dashboard/riwayat-gizi',
+  //     },
+  //   ],
+  // },
 ];

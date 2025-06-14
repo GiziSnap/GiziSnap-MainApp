@@ -118,14 +118,38 @@ export const AddFoodItemDialog = ({
   };
 
   const handleAddFood = async () => {
-    if (selectedFood) {
+    if (selectedFood && nutrition?.data?.data) {
+      // Ditambahkan pengecekan nutrition
+      const foodData = nutrition.data.data;
+
       const foodToAdd = {
+        // --- Data Dasar ---
         name: selectedFood.name,
         quantity: count,
-        calories: Number(nutrition?.data?.data?.['kalori (kkal)'] ?? 0) * count,
-        protein: Number(nutrition?.data?.data['protein (g)'] ?? 0) * count,
-        carbs: Number(nutrition?.data?.data['karbohidrat (g)'] ?? 0) * count,
-        fat: Number(nutrition?.data?.data['lemak (g)'] ?? 0) * count,
+        sumber: foodData.sumber ?? '', // Ditambahkan
+
+        // --- Makronutrien Utama (sudah ada) ---
+        calories: Number(foodData['kalori (kkal)'] ?? 0) * count,
+        protein: Number(foodData['protein (g)'] ?? 0) * count,
+        carbs: Number(foodData['karbohidrat (g)'] ?? 0) * count,
+        fat: Number(foodData['lemak (g)'] ?? 0) * count,
+
+        // --- Nutrisi Tambahan (baru ditambahkan) ---
+        sugar: Number(foodData['gula (g)'] ?? 0) * count,
+        fiber: Number(foodData['serat (g)'] ?? 0) * count,
+
+        // --- Rincian Lemak (baru ditambahkan) ---
+        saturatedfat: Number(foodData['lemak jenuh (g)'] ?? 0) * count,
+        monounsaturatedfat:
+          Number(foodData['lemak tak jenuh tunggal (g)'] ?? 0) * count,
+        polyunsaturatedfat:
+          Number(foodData['lemak tak jenuh ganda (g)'] ?? 0) * count,
+
+        // --- Mineral & Lainnya (baru ditambahkan) ---
+        cholesterol: Number(foodData['kolesterol (mg)'] ?? 0) * count,
+        sodium: Number(foodData['sodium (mg)'] ?? 0) * count,
+        potassium: Number(foodData['kalium (mg)'] ?? 0) * count,
+        energy: Number(foodData['energi (kj)'] ?? 0) * count,
       };
 
       addUserFood(foodToAdd);
@@ -141,7 +165,15 @@ export const AddFoodItemDialog = ({
         console.error('Failed to send notification:', error);
       }
     } else {
-      throw new Error('No food selected');
+      // Pesan error yang lebih spesifik
+      if (!selectedFood) {
+        console.error('No food selected');
+        throw new Error('No food selected');
+      }
+      if (!nutrition?.data?.data) {
+        console.error('Nutrition data is not available');
+        throw new Error('Nutrition data is not available');
+      }
     }
   };
 
