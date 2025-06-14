@@ -134,7 +134,7 @@ const ScanResults = ({
                 key={detectedLabel}
                 className='border-b border-gray-200 dark:border-gray-700'
               >
-                <AccordionTrigger className='px-4 py-3 hover:no-underline flex items-center'>
+                <AccordionTrigger className='flex items-center px-4 py-3 hover:no-underline'>
                   <div className='flex w-full items-center justify-between'>
                     <div className='mr-4 flex items-center gap-3'>
                       <Drumstick className='h-5 w-5 flex-shrink-0 text-emerald-500' />

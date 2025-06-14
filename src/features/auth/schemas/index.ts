@@ -90,7 +90,5 @@ export const updateUserFormSchema = z.object({
     .min(8, { message: 'Kata sandi minimal 8 karakter' })
     .max(50, { message: 'Kata sandi maksimal 50 karakter' })
     .optional()
-    .refine((val) => val === undefined || val.length >= 8, {
-      message: 'Kata sandi minimal 8 karakter',
-    }),
+    .or(z.literal('')),
 });

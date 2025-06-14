@@ -10,12 +10,12 @@ import { useUpdateUser } from '../../hooks/useUpdate';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-
 type UpdateUserFormProps = {
   profileId: string;
 };
+
 export const UpdateUserForm = ({ profileId }: UpdateUserFormProps) => {
-  const { userInfo: data, userAvatar } = useUserData();
+  const { userInfo: data, userAvatar, refetch } = useUserData();
 
   const router = useRouter();
 
@@ -26,35 +26,57 @@ export const UpdateUserForm = ({ profileId }: UpdateUserFormProps) => {
       email_address: data.email_address ?? '',
       username: data.username ?? '',
       password: '',
-      // avatar:
-      //   userAvatar instanceof File
-      //     ? URL.createObjectURL(userAvatar)
-      //     : (userAvatar ?? null),
-      avatar: typeof userAvatar === 'string' ? null : userAvatar,
+      avatar: null,
     },
   });
 
-  console.log(data.password);
-
   const { mutate: updateUser, isPending: isUpdatePending } = useUpdateUser({
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('Berhasil Update Profil');
+
+      await refetch();
+
       void router.push('/dashboard');
-      return Promise.resolve();
     },
-    onError: () => {
+    onError: async () => {
       toast.error('Gagal Update Profil');
-      return Promise.resolve();
     },
   });
 
   const onSubmit = async (values: UpdateUserFormSchema) => {
-    const cleanedValues = {
-      ...values,
-      password: values.password?.trim() === '' ? undefined : values.password,
-    };
-    console.log('Submitted Values:', cleanedValues);
-    updateUser(cleanedValues);
+    const submissionData: Record<string, unknown> = { ...values };
+
+    if (
+      !submissionData.password ||
+      (submissionData.password as string).trim() === ''
+    ) {
+      delete submissionData.password;
+    }
+
+    const formData = new FormData();
+
+    for (const key in submissionData) {
+      const value = submissionData[key];
+      if (value !== null && value !== undefined) {
+        if (typeof value === 'string') {
+          formData.append(key, value);
+        } else if (value instanceof Blob) {
+          formData.append(key, value);
+        } else {
+          throw new Error(`Invalid value type for key ${key}: ${typeof value}`);
+        }
+      }
+    }
+
+    updateUser(
+      formData as unknown as {
+        username: string;
+        email_address: string;
+        id?: string;
+        avatar?: File | null;
+        password?: string;
+      },
+    );
   };
 
   return (
@@ -62,7 +84,6 @@ export const UpdateUserForm = ({ profileId }: UpdateUserFormProps) => {
       <UpdateUserFormInner
         formId='update-user-form'
         onSubmit={onSubmit}
-        // initialAvatar={userAvatar || null}
         initialAvatar={
           userAvatar instanceof File
             ? URL.createObjectURL(userAvatar)
@@ -77,7 +98,7 @@ export const UpdateUserForm = ({ profileId }: UpdateUserFormProps) => {
         >
           {isUpdatePending ? (
             <span className='flex items-center'>
-              Memeperbarui <Loader2 className='ml-2 h-4 w-4 animate-spin' />
+              Memperbarui <Loader2 className='ml-2 h-4 w-4 animate-spin' />
             </span>
           ) : (
             'Perbarui Profil'

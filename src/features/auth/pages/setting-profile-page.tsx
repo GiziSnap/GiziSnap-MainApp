@@ -3,7 +3,7 @@ import { PageContainer, SectionContainer } from '@/components/layouts';
 import { MainLoading } from '@/components/MainLoading';
 import { Heading } from '@/components/ui/heading';
 import { useUserData } from '@/features/dashboard/utils/useUserData';
-import { useEffect, useState } from 'react';
+import { useEffect, use, useState } from 'react';
 import { UpdateUserForm } from '../component/form/UpdateUserForm';
 import {
   Card,
@@ -12,78 +12,73 @@ import {
   CardDescription,
   CardHeader,
 } from '@/components/ui/card';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 type SettingPageProps = {
   params: Promise<{ id: string }>;
 };
 
+// State machine untuk status verifikasi yang lebih andal
+type VerificationState = 'VERIFYING' | 'ALLOWED' | 'DENIED';
+
 export const SettingProfilePage = ({ params }: SettingPageProps) => {
-  console.log('SettingProfilePage: Rendering component');
+  const { id } = use(params);
   const { userInfo, sessionStatus } = useUserData();
-  const [id, setId] = useState<string | null>(null);
+  const router = useRouter();
 
-  // Mengambil ID dari params
+  const [verificationState, setVerificationState] =
+    useState<VerificationState>('VERIFYING');
+
   useEffect(() => {
-    const fetchId = async () => {
-      const { id: newId } = await params;
-      setId(newId);
-    };
-
-    void fetchId();
-  }, [params]);
-
-  // Redirect jika ID tidak sesuai
-  useEffect(() => {
-    if (id && sessionStatus !== 'loading') {
-      if (!userInfo?.id) {
-        console.log(
-          'UserInfo or UserInfo ID is undefined, waiting for data or redirecting to login',
-        );
-        return; // Jangan lakukan redirect ke home, tunggu data atau tangani secara berbeda
-      }
-      console.log('ID from params:', id);
-      console.log('UserInfo ID:', userInfo.id);
-      console.log('Type of ID from params:', typeof id);
-      console.log('Type of UserInfo ID:', typeof userInfo.id);
-      console.log('Types match:', typeof id === typeof userInfo.id);
-      if (String(id) !== String(userInfo.id)) {
-        console.log('Redirecting due to ID mismatch after type conversion');
-        redirect('/');
-      } else {
-        console.log('IDs match after type conversion, no redirect needed');
-      }
+    if (sessionStatus === 'loading') {
+      setVerificationState('VERIFYING');
+      return;
     }
-  }, [id, userInfo, sessionStatus]);
 
-  // Tampilkan loading saat data pengguna sedang dimuat
-  if (sessionStatus === 'loading') {
-    console.log('SettingProfilePage: Showing loading due to sessionStatus');
+    if (sessionStatus !== 'authenticated') {
+      setVerificationState('DENIED');
+      return;
+    }
+
+    if (!userInfo?.id) {
+      setVerificationState('VERIFYING');
+      return;
+    }
+
+    if (String(userInfo.id) === String(id)) {
+      setVerificationState('ALLOWED');
+    } else {
+      setVerificationState('DENIED');
+    }
+  }, [sessionStatus, userInfo, id]);
+
+  useEffect(() => {
+    if (verificationState === 'DENIED') {
+      toast.error('Anda tidak memiliki akses ke halaman ini.');
+      router.push('/dashboard');
+    }
+  }, [verificationState, router]);
+
+  if (verificationState !== 'ALLOWED') {
     return <MainLoading />;
   }
 
-  // Tampilkan loading tambahan jika id belum siap atau userInfo belum lengkap
-  if (!id || !userInfo?.id) {
-    console.log(
-      'SettingProfilePage: Showing loading due to missing id or userInfo',
-    );
-    return <MainLoading />;
-  }
-
-  console.log('SettingProfilePage: Rendering main content');
   return (
     <PageContainer title='Setting - GiziSnap' withFooter withHeader isDashboard>
       <SectionContainer>
         <main className='mx-auto w-full px-4 py-6 sm:max-w-[640px] md:max-w-[768px] lg:max-w-screen-lg xl:max-w-[1280px] 2xl:max-w-screen-xl'>
           <Card>
             <CardHeader>
-              <Heading size='h2'>Akun Settings</Heading>
+              <Heading size='h2'>Pengaturan Akun</Heading>
               <CardDescription>
-                <p>Update akun anda</p>
+                <p>Perbarui detail akun Anda di bawah ini.</p>
               </CardDescription>
               <CardAction></CardAction>
             </CardHeader>
-            <CardContent>{id && <UpdateUserForm profileId={id} />}</CardContent>
+            <CardContent>
+              <UpdateUserForm profileId={id} />
+            </CardContent>
           </Card>
         </main>
       </SectionContainer>
