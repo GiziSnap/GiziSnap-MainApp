@@ -52,7 +52,6 @@ const useLoadDetectionModel = () => {
       await tf.setBackend('webgl');
       await tf.ready();
       const model = await tf.loadGraphModel(url);
-      console.log('Model loaded successfully.');
       return model;
     },
     enabled: !!detectionInfo?.modelJsonPath,

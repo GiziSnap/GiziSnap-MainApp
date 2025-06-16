@@ -104,15 +104,14 @@ export const ScanFoodPage = () => {
     clearAll();
   };
 
-  // 5. Render komponen
   return (
     <PageContainer title='Pindai Makanan' withFooter withHeader isDashboard>
       <SectionContainer
         padded
         container
-        className='min-h-screen bg-gray-50 dark:bg-gray-900'
+        className='min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-8 dark:bg-gray-900'
       >
-        <div className='mb-10 text-center'>
+        <div className='flex w-full flex-col items-center'>
           <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white'>
             Pindai Makanan Anda
           </h1>

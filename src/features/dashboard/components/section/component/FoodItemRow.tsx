@@ -5,6 +5,11 @@ import type { UserFoodhistorySchema } from '../../../types';
 import { ExternalLink } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import CountUp from '@/components/ui/animations/count-up';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 type Props = { food: UserFoodhistorySchema };
 
@@ -88,15 +93,14 @@ export const FoodItemRow = ({ food }: Props) => {
                 {nutritionError.message || 'Nutrition data not found'}
               </span>
             ) : sourceFood?.data?.data?.sumber ? (
-              <a
-                href={sourceFood.data.data.sumber}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='ml-1 text-green-600 transition-colors duration-200 hover:text-green-800'
-                aria-label='Open source link'
-              >
-                <ExternalLink className='h-4 w-4' />
-              </a>
+              <Tooltip>
+                <TooltipTrigger>
+                  <ExternalLink className='h-4 w-4 text-green-600 transition-colors duration-200 hover:text-green-800' />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{sourceFood.data.data.sumber}</p>
+                </TooltipContent>
+              </Tooltip>
             ) : null}
           </div>
         </div>

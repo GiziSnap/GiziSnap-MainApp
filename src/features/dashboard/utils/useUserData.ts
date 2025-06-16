@@ -67,8 +67,6 @@ export const useUserData = () => {
     isError,
   ]);
 
-  console.log('userFoodshistories:', userFoodshistories);
-
   return {
     userInfo,
     userAvatar,

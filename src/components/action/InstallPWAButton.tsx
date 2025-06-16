@@ -15,7 +15,6 @@ const InstallButton = () => {
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      console.log('beforeinstallprompt event fired');
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       setIsInstallable(true);
     };
@@ -35,7 +34,6 @@ const InstallButton = () => {
       // Tampilkan prompt untuk instalasi
       await deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to the install prompt: ${outcome}`);
 
       // Mengatur ulang state berdasarkan respons pengguna
       if (outcome === 'accepted') {

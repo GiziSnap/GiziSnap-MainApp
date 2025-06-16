@@ -19,7 +19,6 @@ export const FoodDataPage = (): React.ReactElement => {
     handlePageChange,
   } = useFoodData(ITEMS_PER_PAGE);
 
-  // Fungsi untuk merender konten utama berdasarkan state (loading, error, success)
   const renderContent = () => {
     if (isLoading) {
       return <FoodTableSkeleton rowsPerPage={ITEMS_PER_PAGE} />;
@@ -55,7 +54,7 @@ export const FoodDataPage = (): React.ReactElement => {
   return (
     <PageContainer title='Daftar Makanan Nusantara' withHeader isDashboard>
       <SectionContainer padded container className='min-h-screen'>
-        <main className='flex w-full flex-col items-center'>
+        <main className='flex w-full flex-col items-center px-4 py-8'>
           <FoodPageHeader />
           {renderContent()}
         </main>

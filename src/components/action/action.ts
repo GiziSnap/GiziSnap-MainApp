@@ -23,13 +23,10 @@ export const subscribeUser = async (
   };
 
   localStorage.setItem('pushSubscriptionData', JSON.stringify(userData));
-
-  console.log('Subscribed user:', userData);
 };
 
 export const unsubscribeUser = async () => {
   localStorage.removeItem('pushSubscriptionData');
-  console.log('User unsubscribed');
 };
 
 interface NotificationMessage {

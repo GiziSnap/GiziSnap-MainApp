@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import type { OurFileRouter } from '@/app/api/uploadthing/core';
 import { toast } from 'sonner';
 import { UploadButton } from '../../../../utils/Uploadthing';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 type UpdateUserFormInnerProps = {
   formId: string;
@@ -205,14 +206,23 @@ export const UpdateUserFormInner = ({
                 />
                 {previewImage && (
                   <div className='mt-2 flex items-center gap-4'>
-                    <Image
+                    <Avatar className='h-26 w-26 rounded-full border-2 border-green-300 shadow-md'>
+                      <AvatarImage
+                        src={previewImage}
+                        alt='Preview Foto Profil'
+                      />
+                      <AvatarFallback className='rounded-full object-cover'>
+                        {previewImage}
+                      </AvatarFallback>
+                    </Avatar>
+                    {/* <Image
                       src={previewImage}
                       alt='Preview Foto Profil'
                       width={100}
                       height={100}
                       className='rounded-full border-2 border-green-300 shadow-md'
-                    />
-                    <Button
+                    /> */}
+                    {/* <Button
                       type='button'
                       variant='destructive'
                       size='sm'
@@ -223,7 +233,7 @@ export const UpdateUserFormInner = ({
                       className='bg-red-500 transition duration-200 hover:bg-red-600'
                     >
                       Hapus
-                    </Button>
+                    </Button> */}
                   </div>
                 )}
               </div>

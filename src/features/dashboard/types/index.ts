@@ -67,5 +67,75 @@ export type UserNutritionSchema = {
   updated_at: string;
 };
 
+/*
+|--------------------------------------------------------------------------
+| File: src/types/index.ts
+|--------------------------------------------------------------------------
+|
+| File ini berisi definisi tipe TypeScript yang digunakan di seluruh 
+| aplikasi untuk memastikan konsistensi dan keamanan data.
+|
+*/
+
+// Tipe untuk informasi yang diterima dari endpoint info model rekomendasi
+export interface RecommendationInfo {
+  modelType: string;
+  version: string;
+  modelJsonPath: string;
+  labelJsonPath: string;
+  labelJsonVersion: string;
+  message: string;
+  scalerXVersion?: string;
+  scalerXPath?: string;
+  scalerYVersion?: string;
+  scalerYPath?: string;
+  metadataVersion: string;
+  metadataPath: string;
+}
+
+// Tipe untuk setiap item dalam file label makanan
+export interface FoodLabel {
+  nama_makanan: string;
+  label: string;
+  region: string;
+  availability: string;
+  origin: string;
+}
+
+// Tipe untuk metadata model rekomendasi
+export interface FoodRecommendationMetadata {
+  nutritional_columns: string[];
+  daily_requirements: Record<string, number>;
+}
+
+// Tipe untuk informasi yang diterima dari endpoint info model deteksi
+export interface DetectionInfo {
+  modelType: string;
+  version: string;
+  modelJsonPath: string;
+  labelJsonPath: string;
+  labelJsonVersion: string;
+  message: string;
+}
+
+// Tipe untuk data label dari model deteksi
+export interface DetectionLabels {
+  labels: string[];
+}
+
+// Anda mungkin juga perlu menambahkan atau menyesuaikan tipe ini
+export interface UserFoodHistory {
+  id: string;
+  user_id: string;
+  food_name: string;
+  quantity: number;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  created_at: string;
+  [key: string]: unknown; // Untuk properti nutrisi dinamis lainnya
+}
+
 // export type FoodAddFormSchema = z.infer<typeof foodAddFormSchema>;
 // export type FoodUpdateFormSchema = z.infer<typeof foodUpdateFormSchema>;
