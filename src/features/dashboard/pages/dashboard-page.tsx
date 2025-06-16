@@ -49,6 +49,25 @@ type FoodData = {
 
 type DailyNeeds = Record<string, number>;
 
+const CustomProgressBar = ({
+  value,
+  colorClassName,
+}: {
+  value: number;
+  colorClassName: string;
+}) => {
+  // Memastikan lebar progress bar tidak melebihi 100% untuk tampilan
+  const displayValue = Math.min(value || 0, 100);
+  return (
+    <div className='h-2 w-full max-w-[100px] rounded-full bg-gray-200'>
+      <div
+        className={`h-full rounded-full transition-colors duration-300 ${colorClassName}`}
+        style={{ width: `${displayValue}%` }}
+      ></div>
+    </div>
+  );
+};
+
 export const DashboardPage = () => {
   const [isRecoModalOpen, setIsRecoModalOpen] = useState(false);
   const [recoFoodToLog, setRecoFoodToLog] = useState<
@@ -669,7 +688,7 @@ export const DashboardPage = () => {
                     <TableHead className='text-right text-xs md:text-sm'>
                       Target
                     </TableHead>
-                    <TableHead className='text-right text-xs md:text-sm'>
+                    <TableHead className='w-40 text-right text-xs md:text-sm'>
                       Persentase
                     </TableHead>
                   </TableRow>
@@ -689,7 +708,25 @@ export const DashboardPage = () => {
                           : '-'}
                       </TableCell>
                       <TableCell className='text-right'>
-                        {item.target > 0 ? `${item.progress.toFixed(0)}%` : '-'}
+                        <div className="flex items-center justify-end space-x-2">
+                            <CustomProgressBar
+                                value={item.progress}
+                                colorClassName={
+                                  item.progress > 100 ? 'bg-red-700' :
+                                  item.color === 'blue' ? 'bg-blue-500' :
+                                  item.color === 'yellow' ? 'bg-yellow-500' :
+                                  item.color === 'green' ? 'bg-green-500' :
+                                  item.color === 'purple' ? 'bg-purple-500' :
+                                  item.color === 'red' ? 'bg-red-500' :
+                                  item.color === 'pink' ? 'bg-pink-500' :
+                                  item.color === 'indigo' ? 'bg-indigo-500' :
+                                  'bg-gray-400'
+                                }
+                            />
+                            <span className="w-10 text-right text-xs">
+                                {item.target > 0 ? `${item.progress.toFixed(0)}%` : '-'}
+                            </span>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
