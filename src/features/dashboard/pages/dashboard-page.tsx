@@ -436,7 +436,7 @@ export const DashboardPage = () => {
   }, [loggedFoodsOnSelectedDate, userInfo]);
 
   const summaryNutritionData = useMemo(() => {
-    const mainNutrients = ['Kalori', 'Protein', 'Karbohidrat', 'Lemak Total'];
+    const mainNutrients = ['Kalori', 'Protein', 'Karbohidrat', 'Lemak Total', 'Gula', 'Sodium', 'Kalium', 'Kolesterol', 'Serat'];
     return detailedNutritionData.filter((item) =>
       mainNutrients.includes(item.label),
     );

@@ -33,6 +33,7 @@ import { toast } from 'sonner';
 import type { UserFoodhistorySchema } from '../types';
 import { useAddUserFood } from '../hooks/useAddUserFood';
 import IconRounded from '@/../public/icon512_rounded.png';
+import { useUserData } from '../utils/useUserData';
 
 // Fungsi helper untuk mengirim notifikasi browser
 const sendNotification = async (title: string, icon: string, body: string) => {
@@ -78,11 +79,13 @@ const PersonalizedRecommendationsCard = ({
     null,
   );
   const [count, setCount] = useState(1);
+  const { refetch } = useUserData()
 
   const { mutate: addUserFood, isPending } = useAddUserFood({
     onSuccess: async () => {
       toast.success(`'${selectedFood?.name}' berhasil ditambahkan!`);
       onRefresh();
+      void refetch();
       setIsModalOpen(false);
     },
     onError: async (error: unknown) => {
