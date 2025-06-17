@@ -64,7 +64,7 @@ const NutritionPreview: React.FC<NutritionPreviewProps> = ({
         <h4 className='mb-2 text-sm font-medium text-gray-700'>
           Nutrition Preview
         </h4>
-        <div className='flex max-h-[300px] min-w-[120px] flex-wrap gap-4 overflow-y-auto lg:overflow-y-auto md:max-h-[150px] md:overflow-y-hidden lg:min-h-[250px]'>
+        <div className='flex max-h-[300px] min-w-[120px] flex-wrap gap-4 overflow-y-auto md:max-h-[150px] md:overflow-y-hidden lg:min-h-[250px] lg:overflow-y-auto'>
           {Array(9)
             .fill(0)
             .map((_, index) => (
@@ -112,7 +112,7 @@ const NutritionPreview: React.FC<NutritionPreviewProps> = ({
       <h4 className='mb-2 text-sm font-medium text-gray-700'>
         Nutrition Preview
       </h4>
-      <div className='flex max-h-[300px] min-w-[120px] flex-wrap gap-4 overflow-y-auto lg:overflow-y-auto md:max-h-[150px] md:overflow-y-hidden lg:min-h-[250px]'>
+      <div className='flex max-h-[300px] min-w-[120px] flex-wrap gap-4 overflow-y-auto md:max-h-[150px] md:overflow-y-hidden lg:min-h-[250px] lg:overflow-y-auto'>
         {nutritionFields.map(({ key, label, unit, defaultValue }) => {
           const rawValue = nutrition.data.data[key] ?? defaultValue;
           const displayValue = calculateValue(rawValue, key === 'nama_makanan');

@@ -13,7 +13,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     void signOut();
-  }
+  };
 
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 0);
@@ -28,8 +28,9 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'
-        }`}
+      className={`fixed top-0 right-0 left-0 z-50 border-b transition-all duration-300 ${
+        isScrolled ? 'backdrop-blur-lg' : 'bg-transparent'
+      }`}
     >
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between'>
@@ -50,7 +51,7 @@ export const Navbar = () => {
                   </Button>
                 </Link>
                 <Button
-                  className='bg-white border border-green-500 text-green-500 hover:bg-green-50 hover:text-green-600'
+                  className='border border-green-500 bg-white text-green-500 hover:bg-green-50 hover:text-green-600'
                   onClick={handleLogout}
                 >
                   Keluar

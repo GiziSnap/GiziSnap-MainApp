@@ -101,7 +101,7 @@ const NutritionCard = ({ title, items }: NutritionCardProps) => {
                         from={0}
                         to={item.consumed}
                         duration={0.75}
-                        separator="."
+                        separator='.'
                       />
                       /{item.target} {item.unit}
                     </div>

@@ -73,7 +73,7 @@ const PersonalizedRecommendationsCard = ({
     null,
   );
   const [count, setCount] = useState(1);
-  const { refetch } = useUserData()
+  const { refetch } = useUserData();
 
   const { mutate: addUserFood, isPending } = useAddUserFood({
     onSuccess: async () => {

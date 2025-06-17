@@ -82,7 +82,12 @@ export const AddFoodItemDialog = ({
 
   useEffect(() => {
     // --- TAMBAHAN: Jangan cari jika sudah ada makanan yang dipilih ---
-    if (foodData && Array.isArray(foodData.data) && searchQuery && !selectedFood) {
+    if (
+      foodData &&
+      Array.isArray(foodData.data) &&
+      searchQuery &&
+      !selectedFood
+    ) {
       const results = foodData.data
         .filter(
           (item) =>
@@ -115,7 +120,7 @@ export const AddFoodItemDialog = ({
     setIsModalOpen(false);
     setCount(1);
   };
-  
+
   // --- BARU: Fungsi untuk kembali ke mode pencarian ---
   const handleChangeSelection = () => {
     setSelectedFood(null);
@@ -228,7 +233,9 @@ export const AddFoodItemDialog = ({
             </>
           ) : (
             <div className='flex items-center justify-between rounded-md border bg-slate-50 p-3'>
-              <span className='text-sm font-medium text-slate-800'>{selectedFood.label}</span>
+              <span className='text-sm font-medium text-slate-800'>
+                {selectedFood.label}
+              </span>
               <Button variant='ghost' size='sm' onClick={handleChangeSelection}>
                 <Pencil className='mr-2 h-4 w-4' />
                 Ubah

@@ -12,6 +12,7 @@ import AnimatedContent from '@/components/ui/animations/animated-content';
 
 export const LoginPage = () => {
   const router = useRouter();
+
   return (
     <PageContainer title='Login - GiziSnap'>
       <div className='relative flex min-h-screen w-full'>

@@ -19,7 +19,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     void signOut();
-  }
+  };
 
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false);

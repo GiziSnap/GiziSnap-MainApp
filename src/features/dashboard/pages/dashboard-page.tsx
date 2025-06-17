@@ -455,7 +455,17 @@ export const DashboardPage = () => {
   }, [loggedFoodsOnSelectedDate, userInfo]);
 
   const summaryNutritionData = useMemo(() => {
-    const mainNutrients = ['Kalori', 'Protein', 'Karbohidrat', 'Lemak Total', 'Gula', 'Sodium', 'Kalium', 'Kolesterol', 'Serat'];
+    const mainNutrients = [
+      'Kalori',
+      'Protein',
+      'Karbohidrat',
+      'Lemak Total',
+      'Gula',
+      'Sodium',
+      'Kalium',
+      'Kolesterol',
+      'Serat',
+    ];
     return detailedNutritionData.filter((item) =>
       mainNutrients.includes(item.label),
     );
@@ -708,24 +718,34 @@ export const DashboardPage = () => {
                           : '-'}
                       </TableCell>
                       <TableCell className='text-right'>
-                        <div className="flex items-center justify-end space-x-2">
-                            <CustomProgressBar
-                                value={item.progress}
-                                colorClassName={
-                                  item.progress > 100 ? 'bg-red-700' :
-                                  item.color === 'blue' ? 'bg-blue-500' :
-                                  item.color === 'yellow' ? 'bg-yellow-500' :
-                                  item.color === 'green' ? 'bg-green-500' :
-                                  item.color === 'purple' ? 'bg-purple-500' :
-                                  item.color === 'red' ? 'bg-red-500' :
-                                  item.color === 'pink' ? 'bg-pink-500' :
-                                  item.color === 'indigo' ? 'bg-indigo-500' :
-                                  'bg-gray-400'
-                                }
-                            />
-                            <span className="w-10 text-right text-xs">
-                                {item.target > 0 ? `${item.progress.toFixed(0)}%` : '-'}
-                            </span>
+                        <div className='flex items-center justify-end space-x-2'>
+                          <CustomProgressBar
+                            value={item.progress}
+                            colorClassName={
+                              item.progress > 100
+                                ? 'bg-red-700'
+                                : item.color === 'blue'
+                                  ? 'bg-blue-500'
+                                  : item.color === 'yellow'
+                                    ? 'bg-yellow-500'
+                                    : item.color === 'green'
+                                      ? 'bg-green-500'
+                                      : item.color === 'purple'
+                                        ? 'bg-purple-500'
+                                        : item.color === 'red'
+                                          ? 'bg-red-500'
+                                          : item.color === 'pink'
+                                            ? 'bg-pink-500'
+                                            : item.color === 'indigo'
+                                              ? 'bg-indigo-500'
+                                              : 'bg-gray-400'
+                            }
+                          />
+                          <span className='w-10 text-right text-xs'>
+                            {item.target > 0
+                              ? `${item.progress.toFixed(0)}%`
+                              : '-'}
+                          </span>
                         </div>
                       </TableCell>
                     </TableRow>
