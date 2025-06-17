@@ -63,11 +63,8 @@ export const AddFoodItemDialog = ({
       onSuccess: async () => {
         toast.success('Makanan berhasil ditambahkan');
         setIsModalOpen(false);
-        setSelectedFood(null);
-        setSearchQuery('');
-        setSearchResults([]);
-        setIsModalOpen(false);
-        setCount(1);
+        // --- Panggil handleCancel untuk reset state ---
+        handleCancel();
         refetch();
       },
       onError: async () => {
@@ -84,7 +81,8 @@ export const AddFoodItemDialog = ({
   }, [nutrition, nutritionError]);
 
   useEffect(() => {
-    if (foodData && Array.isArray(foodData.data) && searchQuery) {
+    // --- TAMBAHAN: Jangan cari jika sudah ada makanan yang dipilih ---
+    if (foodData && Array.isArray(foodData.data) && searchQuery && !selectedFood) {
       const results = foodData.data
         .filter(
           (item) =>
@@ -99,12 +97,13 @@ export const AddFoodItemDialog = ({
     } else {
       setSearchResults([]);
     }
-  }, [searchQuery, foodData]);
+  }, [searchQuery, foodData, selectedFood]); // --- TAMBAHAN: Tambahkan selectedFood sebagai dependency
 
+  // --- MODIFIKASI: Sederhanakan fungsi ini ---
   const handleSelectFood = (item: [string, string]) => {
     if (item?.[0]) {
       setSelectedFood({ name: item[0], label: item[1] });
-      setSearchQuery(item[0]);
+      // Hapus setSearchQuery dan setSearchResults agar tampilan langsung berubah
       setSearchResults([]);
     }
   };
@@ -116,17 +115,22 @@ export const AddFoodItemDialog = ({
     setIsModalOpen(false);
     setCount(1);
   };
+  
+  // --- BARU: Fungsi untuk kembali ke mode pencarian ---
+  const handleChangeSelection = () => {
+    setSelectedFood(null);
+    setSearchQuery('');
+  };
 
   const handleAddFood = async () => {
     if (selectedFood && nutrition?.data?.data) {
-      // Ditambahkan pengecekan nutrition
       const foodData = nutrition.data.data;
 
       const foodToAdd = {
         // --- Data Dasar ---
         name: selectedFood.name,
         quantity: count,
-        sumber: foodData.sumber ?? '', // Ditambahkan
+        sumber: foodData.sumber ?? '',
 
         // --- Makronutrien Utama (sudah ada) ---
         calories: Number(foodData['kalori (kkal)'] ?? 0) * count,
@@ -165,7 +169,6 @@ export const AddFoodItemDialog = ({
         console.error('Failed to send notification:', error);
       }
     } else {
-      // Pesan error yang lebih spesifik
       if (!selectedFood) {
         console.error('No food selected');
         throw new Error('No food selected');
@@ -207,18 +210,32 @@ export const AddFoodItemDialog = ({
           Tambahkan menu makanan baru harianmu
         </DialogDescription>
         <div className='space-y-2'>
-          <SearchFood
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            searchResults={searchResults}
-            handleSelectFood={handleSelectFood}
-          />
-          {searchResults.length > 0 && (
-            <SearchResults
-              searchResults={searchResults}
-              handleSelectFood={handleSelectFood}
-            />
+          {/* --- MODIFIKASI: Render kondisional untuk form pencarian --- */}
+          {!selectedFood ? (
+            <>
+              <SearchFood
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                searchResults={searchResults}
+                handleSelectFood={handleSelectFood}
+              />
+              {searchResults.length > 0 && (
+                <SearchResults
+                  searchResults={searchResults}
+                  handleSelectFood={handleSelectFood}
+                />
+              )}
+            </>
+          ) : (
+            <div className='flex items-center justify-between rounded-md border bg-slate-50 p-3'>
+              <span className='text-sm font-medium text-slate-800'>{selectedFood.label}</span>
+              <Button variant='ghost' size='sm' onClick={handleChangeSelection}>
+                <Pencil className='mr-2 h-4 w-4' />
+                Ubah
+              </Button>
+            </div>
           )}
+
           <QuantityInput
             count={count}
             incrementCount={() => setCount(count + 1)}
