@@ -59,7 +59,7 @@ export const SidebarItem = ({ name, url, icon: Icon, items }: MenuItem) => {
 
   return (
     <SidebarMenuItem
-      className={cn(pathname === url && 'bg-accent text-accent-foreground')}
+      className={cn(pathname === url && 'bg-slate-300/35 text-accent-foreground')}
     >
       <SidebarMenuButton asChild>
         <Link href={url} className='flex w-full items-center gap-2'>
