@@ -49,7 +49,7 @@ export const HeaderDashboard = () => {
           <Heading size={'h4'}>{dataUser.brandName}</Heading>
         </Link>
       </div>
-      <div className='flex items-center gap-5'>
+      {/* <div className='flex items-center gap-5'>
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger
             className='cursor-pointer outline-none focus:outline-none'
@@ -98,7 +98,7 @@ export const HeaderDashboard = () => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
+      </div> */}
     </header>
   );
 };

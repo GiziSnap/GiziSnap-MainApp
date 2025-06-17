@@ -1,9 +1,3 @@
-// --- File: src/components/PersonalizedRecommendationsCard.tsx ---
-// Deskripsi: Komponen ini sekarang menangani penambahan makanan secara mandiri.
-// Mengklik item akan membuka modal internal untuk konfirmasi jumlah,
-// lalu langsung menambahkan makanan menggunakan hook useAddUserFood.
-// PERBARUAN: Informasi nutrisi lengkap sekarang ditampilkan di dalam modal.
-
 'use client';
 
 import { useState, useCallback, useMemo } from 'react';

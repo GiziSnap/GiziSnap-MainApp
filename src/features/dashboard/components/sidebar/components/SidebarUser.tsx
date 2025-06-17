@@ -81,13 +81,13 @@ export function SidebarUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <Link href={`/dashboard/${userInfo.id}/profile`}>
-                <DropdownMenuItem>Account</DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer w-full'>Account</DropdownMenuItem>
               </Link>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Notifications</DropdownMenuItem>
+              {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Notifications</DropdownMenuItem> */}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
+            <DropdownMenuItem onClick={handleLogout} className='w-full cursor-pointer'>
               <span>Logout</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
