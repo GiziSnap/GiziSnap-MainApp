@@ -11,9 +11,15 @@ import { Menu } from 'lucide-react';
 import { Sheet } from '@/components/ui/sheet';
 import Link from 'next/link';
 import { useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = useSession();
+
+  const handleLogout = () => {
+    void signOut();
+  }
 
   const scrollToSection = (sectionId: string) => {
     setIsMenuOpen(false);
@@ -80,21 +86,39 @@ export const Navbar = () => {
               Kontak
             </Button>
             <Separator className='my-2' />
-            <div className='mt-4 flex flex-col space-y-2 px-3 pt-3'>
-              <Link href='/auth/login'>
-                <Button className='w-full bg-green-500 text-white hover:bg-green-600'>
-                  Masuk
-                </Button>
-              </Link>
-              <Link href='/auth/register'>
-                <Button
-                  variant='outline'
-                  className='w-full border-green-500 text-green-500 hover:bg-green-50'
-                >
-                  Daftar
-                </Button>
-              </Link>
-            </div>
+            {session ? (
+              <div className='mt-4 flex flex-col space-y-2 px-3 pt-3'>
+                <Link href='/dashboard'>
+                  <Button className='w-full bg-green-500 text-white hover:bg-green-600'>
+                    Dashboard
+                  </Button>
+                </Link>
+                <Link href='' onClick={handleLogout}>
+                  <Button
+                    variant='outline'
+                    className='w-full border-green-500 text-green-500 hover:bg-green-50'
+                  >
+                    Keluar
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div className='mt-4 flex flex-col space-y-2 px-3 pt-3'>
+                <Link href='/auth/login'>
+                  <Button className='w-full bg-green-500 text-white hover:bg-green-600'>
+                    Masuk
+                  </Button>
+                </Link>
+                <Link href='/auth/register'>
+                  <Button
+                    variant='outline'
+                    className='w-full border-green-500 text-green-500 hover:bg-green-50'
+                  >
+                    Daftar
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </SheetContent>
       </Sheet>
