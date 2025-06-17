@@ -27,6 +27,7 @@ export const LoginUserForm = () => {
     onSuccess: async () => {
       toast.success('Login berhasil');
       router.push('/dashboard');
+      window.location.reload();
     },
     onError: async () => {
       toast.error('Login gagal karena username atau kata sandi salah.');
