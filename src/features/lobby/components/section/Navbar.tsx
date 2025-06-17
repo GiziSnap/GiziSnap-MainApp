@@ -11,8 +11,8 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { data: session } = useSession();
 
-  const handleLogout = () => {
-    void signOut();
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
   };
 
   const handleScroll = () => {
