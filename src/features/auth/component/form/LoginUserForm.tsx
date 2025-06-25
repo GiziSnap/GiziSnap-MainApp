@@ -2,41 +2,53 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { LoginUserFormInner } from './LoginUserFormInner';
-import type { LoginUserFormSchema } from '../../types';
 import { loginUserFormSchema } from '../../schemas';
+import { type LoginUserFormSchema } from '../../types';
+import { useLogin } from '../../hooks/useLogin';
 
 export const LoginUserForm = () => {
+  const router = useRouter();
+
   const form = useForm<LoginUserFormSchema>({
     resolver: zodResolver(loginUserFormSchema),
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
   });
 
-  function onSubmit(values: LoginUserFormSchema) {
-    console.log('Login:', values);
-  }
+  const { mutate: login, isPending: isLoginPending } = useLogin({
+    onSuccess: async () => {
+      toast.success('Login berhasil');
+      router.push('/dashboard');
+      window.location.reload();
+    },
+    onError: async () => {
+      toast.error('Login gagal karena username atau kata sandi salah.');
+    },
+  });
+
+  const onSubmit = async (values: LoginUserFormSchema) => login(values);
 
   return (
     <Form {...form}>
       <LoginUserFormInner
-        formId="login-user-form"
+        formId='login-user-form'
         onSubmit={form.handleSubmit(onSubmit)}
       />
-
       <Button
-        form="login-user-form"
-        variant="default"
-        type="submit"
-        disabled={!form.formState.isValid}
-        className="p w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white transition-colors duration-300 ease-in-out hover:scale-[1.02] hover:bg-green-700 active:scale-[0.98]"
+        form='login-user-form'
+        type='submit'
+        disabled={isLoginPending}
+        className='w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white transition-colors duration-300 ease-in-out hover:scale-[1.02] hover:bg-green-700 active:scale-[0.98]'
       >
-        Masuk
+        {isLoginPending ? 'Memproses...' : 'Masuk'}
       </Button>
     </Form>
   );

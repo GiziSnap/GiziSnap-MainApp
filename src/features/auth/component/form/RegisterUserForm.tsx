@@ -7,35 +7,50 @@ import RegisterUserFormInner from './RegisterUserFormInner';
 import { registerUserFormSchema } from '../../schemas';
 import { Button } from '@/components/ui/button';
 import type { RegisterUserFormSchema } from '../../types';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useRegister } from '../../hooks/useRegister';
 
 export const RegisterUserForm = () => {
+  const router = useRouter();
+
   const form = useForm<RegisterUserFormSchema>({
     resolver: zodResolver(registerUserFormSchema),
     defaultValues: {
       username: '',
-      email: '',
+      email_address: '',
       password: '',
-      confirmPassword: '',
+      // confirmPassword: '',
     },
   });
 
-  const onSubmit = (values: RegisterUserFormSchema) => {
-    console.log('Register:', values);
-  };
+  const { mutate: register, isPending: isRegisterPending } = useRegister({
+    onSuccess: () => {
+      toast.success('Pendaftaran berhasil');
+      router.push('/auth/login');
+      return Promise.resolve();
+    },
+    onError: () => {
+      toast.error('Pendaftaran gagal');
+      return Promise.resolve();
+    },
+  });
+
+  const onSubmit = async (values: RegisterUserFormSchema) => register(values);
 
   return (
     <Form {...form}>
       <RegisterUserFormInner
-        formId="create-user-form"
+        formId='create-user-form'
         onSubmit={form.handleSubmit(onSubmit)}
       />
       <Button
-        type="submit"
-        form="create-user-form"
-        disabled={!form.formState.isValid}
-        className="w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+        type='submit'
+        form='create-user-form'
+        disabled={form.formState.isSubmitting || isRegisterPending}
+        className='w-full transform rounded-lg bg-green-600 py-3 font-semibold text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50'
       >
-        Daftar
+        {isRegisterPending ? 'Loading...' : 'Daftar'}
       </Button>
     </Form>
   );

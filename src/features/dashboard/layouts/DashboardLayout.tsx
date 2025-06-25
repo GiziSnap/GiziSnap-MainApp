@@ -1,4 +1,4 @@
-import { Sidebar } from '@/features/dashboard/component/sidebar/Sidebar';
+// import { Sidebar } from '@/features/dashboard/component/sidebar/Sidebar';
 import { cookies } from 'next/headers';
 
 type DashboardLayoutProps = {
@@ -9,6 +9,8 @@ type DashboardLayoutProps = {
 import { type Metadata } from 'next';
 import { cn } from '@/lib/utils';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { Sidebar } from '../components/sidebar/components/Sidebar';
+import { useSession } from 'next-auth/react';
 
 export const DashboardLayoutMetadata: Metadata = {
   title: 'Dashboard',
@@ -23,6 +25,7 @@ export const DashboardLayout = async ({
   const defaultOpen = cookieStore.get('sidebar_state')?.value === 'true';
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
+      {/* <Sidebar /> */}
       <Sidebar />
       <main className={cn('flex w-full flex-col', className)}>{children}</main>
     </SidebarProvider>

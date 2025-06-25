@@ -1,0 +1,110 @@
+'use client';
+
+import { useGetFoodNutrition } from '@/features/machine-learning/hooks/useGetFoodNutrition';
+import type { UserFoodhistorySchema } from '../../../types';
+import { ExternalLink } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
+import CountUp from '@/components/ui/animations/count-up';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+
+type Props = { food: UserFoodhistorySchema };
+
+export const FoodItemRow = ({ food }: Props) => {
+  const {
+    data: sourceFood,
+    isLoading: isLoadingNutrition,
+    error: nutritionError,
+  } = useGetFoodNutrition({ foodName: food.name });
+
+  return (
+    <div className='flex items-start border-b border-gray-100 pb-3 transition-colors duration-200 last:border-b-0 hover:bg-gray-50'>
+      <div className='flex-1 p-2'>
+        <h3 className='text-base font-medium text-gray-800'>{food.name}</h3>
+
+        <div className='mt-1 grid grid-cols-2 gap-2 text-sm text-wrap text-gray-600'>
+          <p>
+            Porsi: <span className='font-medium'>{food.quantity}</span>
+          </p>
+          <p>
+            Kalori:{' '}
+            <span className='font-medium'>
+              <CountUp
+                from={0}
+                to={food.calories}
+                separator=','
+                duration={1}
+                className='count-up-text'
+              />{' '}
+              kcal
+            </span>
+          </p>
+          <p>
+            Protein:{' '}
+            <span className='font-medium'>
+              <CountUp
+                from={0}
+                to={food.protein}
+                separator=','
+                duration={1}
+                className='count-up-text'
+              />{' '}
+              g
+            </span>
+          </p>
+          <p>
+            Karbo:{' '}
+            <span className='font-medium'>
+              <CountUp
+                from={0}
+                to={food.carbs}
+                separator=','
+                duration={1}
+                className='count-up-text'
+              />{' '}
+              g
+            </span>
+          </p>
+          <p>
+            Lemak:{' '}
+            <span className='font-medium'>
+              <CountUp
+                from={0}
+                to={food.fat}
+                separator=','
+                duration={1}
+                className='count-up-text'
+              />{' '}
+              g
+            </span>
+          </p>
+
+          <div className='flex items-center'>
+            Sumber: <span className='mr-1 font-medium'>{food.sumber}</span>
+            {isLoadingNutrition ? (
+              <span>
+                <Skeleton className='h-4 w-12 bg-slate-200' />
+              </span>
+            ) : nutritionError ? (
+              <span className='ml-1 text-red-500'>
+                {nutritionError.message || 'Nutrition data not found'}
+              </span>
+            ) : sourceFood?.data?.data?.sumber ? (
+              <Tooltip>
+                <TooltipTrigger>
+                  <ExternalLink className='h-4 w-4 text-green-600 transition-colors duration-200 hover:text-green-800' />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{sourceFood.data.data.sumber}</p>
+                </TooltipContent>
+              </Tooltip>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

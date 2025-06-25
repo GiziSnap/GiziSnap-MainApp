@@ -48,7 +48,7 @@ export const renderElements = <T>({
     // Type guard to ensure we're dealing with a ReactElement
     if (!React.isValidElement(element)) {
       console.warn(
-        'renderElements: render function must return a valid React element'
+        'renderElements: render function must return a valid React element',
       );
       return null;
     }
@@ -68,7 +68,7 @@ export const renderElements = <T>({
     if (process.env.NODE_ENV === 'development') {
       console.warn(
         'renderElements: No key provided for element. Consider providing a keyExtractor or adding keys to rendered elements.',
-        { item, index }
+        { item, index },
       );
     }
 
