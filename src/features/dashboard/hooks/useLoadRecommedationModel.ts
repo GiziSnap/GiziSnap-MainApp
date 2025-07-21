@@ -60,7 +60,7 @@ const useLoadRecommendationModel = () => {
   } = useQuery<FoodRecommendationMetadata, Error>({
     queryKey: ['get-reco-metadata', recoInfo?.metadataPath],
     queryFn: async () => {
-      if (!recoInfo?.metadataPath) return null;
+      if (!recoInfo?.metadataPath) throw new Error('Metadata path is required.');
       const url = new URL(recoInfo.metadataPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       const { data } = await mlAxios.get<{ data: FoodRecommendationMetadata }>(
@@ -76,7 +76,7 @@ const useLoadRecommendationModel = () => {
     data: recoModel,
     isLoading: isModelLoading,
     error: modelError,
-  } = useQuery<LayersModel, Error>({
+  } = useQuery<LayersModel | null, Error>({
     queryKey: ['load-reco-model', recoInfo?.modelJsonPath],
     queryFn: async () => {
       if (!recoInfo?.modelJsonPath) return null;
