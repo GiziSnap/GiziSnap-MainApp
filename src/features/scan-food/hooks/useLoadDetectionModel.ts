@@ -21,8 +21,10 @@ const useLoadDetectionModel = () => {
   } = useQuery<string[], Error>({
     queryKey: ['get-detection-labels', detectionInfo?.labelJsonPath],
     queryFn: async () => {
-      if (!detectionInfo?.labelJsonPath)
-        throw new Error('Label path is required.');
+      if (!detectionInfo?.labelJsonPath) {
+        // Return a default value or throw an error if the path is not available
+        return [];
+      }
       const url = new URL(
         detectionInfo.labelJsonPath,
         env.NEXT_PUBLIC_ML_API_URL,
@@ -43,8 +45,10 @@ const useLoadDetectionModel = () => {
   } = useQuery<GraphModel, Error>({
     queryKey: ['load-yolo-model', detectionInfo?.modelJsonPath],
     queryFn: async () => {
-      if (!detectionInfo?.modelJsonPath)
-        throw new Error('Model path is required.');
+      if (!detectionInfo?.modelJsonPath) {
+        // Return a default value or throw an error if the path is not available
+        return null;
+      }
       const url = new URL(
         detectionInfo.modelJsonPath,
         env.NEXT_PUBLIC_ML_API_URL,
