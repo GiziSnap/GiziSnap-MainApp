@@ -81,8 +81,8 @@ export type UserNutritionSchema = {
 export interface RecommendationInfo {
   modelType: string;
   version: string;
-  modelJsonPath: string | null;
-  labelJsonPath: string | null;
+  modelJsonPath: string;
+  labelJsonPath: string;
   labelJsonVersion: string;
   message: string;
   scalerXVersion?: string;
@@ -90,7 +90,7 @@ export interface RecommendationInfo {
   scalerYVersion?: string;
   scalerYPath?: string;
   metadataVersion: string;
-  metadataPath: string | null;
+  metadataPath: string;
 }
 
 // Tipe untuk setiap item dalam file label makanan
