@@ -42,7 +42,7 @@ const useLoadDetectionModel = () => {
     data: yoloModel,
     isLoading: isModelLoading,
     error: modelError,
-  } = useQuery<GraphModel | null, Error>({
+  } = useQuery<GraphModel, Error>({
     queryKey: ['load-yolo-model', detectionInfo?.modelJsonPath],
     queryFn: async () => {
       if (!detectionInfo?.modelJsonPath) {
