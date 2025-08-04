@@ -41,7 +41,7 @@ const useLoadRecommendationModel = () => {
   } = useQuery<FoodLabel[], Error>({
     queryKey: ['get-food-labels', recoInfo?.labelJsonPath],
     queryFn: async () => {
-      if (!recoInfo?.labelJsonPath) return [];
+      if (!recoInfo?.labelJsonPath) throw new Error('Label path is required.');
       const url = new URL(recoInfo.labelJsonPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       const { data } = await mlAxios.get<{ data: FoodLabel[] }>(url);
@@ -60,7 +60,8 @@ const useLoadRecommendationModel = () => {
   } = useQuery<FoodRecommendationMetadata, Error>({
     queryKey: ['get-reco-metadata', recoInfo?.metadataPath],
     queryFn: async () => {
-      if (!recoInfo?.metadataPath) return null;
+      if (!recoInfo?.metadataPath)
+        throw new Error('Metadata path is required.');
       const url = new URL(recoInfo.metadataPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       const { data } = await mlAxios.get<{ data: FoodRecommendationMetadata }>(
@@ -79,7 +80,7 @@ const useLoadRecommendationModel = () => {
   } = useQuery<LayersModel, Error>({
     queryKey: ['load-reco-model', recoInfo?.modelJsonPath],
     queryFn: async () => {
-      if (!recoInfo?.modelJsonPath) return null;
+      if (!recoInfo?.modelJsonPath) throw new Error('Model path is required.');
       const url = new URL(recoInfo.modelJsonPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       await tf.setBackend('webgl');
