@@ -5,8 +5,8 @@ export interface ApiProps {
 }
 
 export interface DetectionInfo {
-  modelJsonPath: string | null;
-  labelJsonPath: string | null;
+  modelJsonPath: string;
+  labelJsonPath: string;
 }
 
 export interface DetectionLabels {

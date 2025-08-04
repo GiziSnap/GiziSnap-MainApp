@@ -41,7 +41,7 @@ const useLoadRecommendationModel = () => {
   } = useQuery<FoodLabel[], Error>({
     queryKey: ['get-food-labels', recoInfo?.labelJsonPath],
     queryFn: async () => {
-      if (!recoInfo?.labelJsonPath) throw new Error('Label path is required.');
+      if (!recoInfo?.labelJsonPath) return [];
       const url = new URL(recoInfo.labelJsonPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       const { data } = await mlAxios.get<{ data: FoodLabel[] }>(url);
@@ -49,7 +49,7 @@ const useLoadRecommendationModel = () => {
       if (!Array.isArray(extractedData)) return [];
       return extractedData as FoodLabel[];
     },
-    enabled: !!recoInfo?.labelJsonPath && recoInfo.labelJsonPath !== 'N/A',
+    enabled: !!recoInfo?.labelJsonPath,
     staleTime: Infinity,
   });
 
@@ -60,8 +60,7 @@ const useLoadRecommendationModel = () => {
   } = useQuery<FoodRecommendationMetadata, Error>({
     queryKey: ['get-reco-metadata', recoInfo?.metadataPath],
     queryFn: async () => {
-      if (!recoInfo?.metadataPath)
-        throw new Error('Metadata path is required.');
+      if (!recoInfo?.metadataPath) throw new Error('Metadata path is required.');
       const url = new URL(recoInfo.metadataPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       const { data } = await mlAxios.get<{ data: FoodRecommendationMetadata }>(
@@ -69,7 +68,7 @@ const useLoadRecommendationModel = () => {
       );
       return safeDataExtractor<FoodRecommendationMetadata>(data);
     },
-    enabled: !!recoInfo?.metadataPath && recoInfo.metadataPath !== 'N/A',
+    enabled: !!recoInfo?.metadataPath,
     staleTime: Infinity,
   });
 
@@ -80,7 +79,7 @@ const useLoadRecommendationModel = () => {
   } = useQuery<LayersModel | null, Error>({
     queryKey: ['load-reco-model', recoInfo?.modelJsonPath],
     queryFn: async () => {
-      if (!recoInfo?.modelJsonPath) throw new Error('Model path is required.');
+      if (!recoInfo?.modelJsonPath) return null;
       const url = new URL(recoInfo.modelJsonPath, env.NEXT_PUBLIC_ML_API_URL)
         .href;
       await tf.setBackend('webgl');
@@ -88,7 +87,7 @@ const useLoadRecommendationModel = () => {
       const model = await tf.loadLayersModel(url);
       return model;
     },
-    enabled: !!recoInfo?.modelJsonPath && recoInfo.modelJsonPath !== 'N/A',
+    enabled: !!recoInfo?.modelJsonPath,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
